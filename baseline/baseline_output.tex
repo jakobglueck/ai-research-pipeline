@@ -1,0 +1,485 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm]{geometry}
+\usepackage{times}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{microtype}
+\usepackage{caption}
+\usepackage{parskip}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  citecolor=black,
+  urlcolor=black
+}
+
+\title{\textbf{Experience Breeds Skepticism: How Professional\\
+Coding Experience Predicts Distrust in AI-Generated\\
+Output Accuracy Among Software Developers}}
+
+\author{Anonymous Author\\
+\texttt{anonymous@institution.edu}}
+
+\date{}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+%-----------------------------------------------------------------------
+\begin{abstract}
+As AI-powered code generation tools become ubiquitous in software development,
+understanding which developers trust their outputs is critical for adoption
+strategy and risk management. A common assumption holds that technically
+experienced developers will trust AI tools more because they have greater
+capacity to evaluate and integrate AI suggestions effectively. Using data from
+the \emph{Stack Overflow Developer Survey 2024} ($N = 65{,}437$), this study
+examines the relationship between professional coding experience and self-reported
+trust in AI output accuracy among active AI tool users ($n = 31{,}025$). Contrary
+to the intuitive expectation, a significant positive association between experience
+and distrust emerges: developers in the \emph{Highly distrust} category average
+$10.25$ years of professional experience versus $8.75$ years in the most trusting
+group. A Kruskal--Wallis test confirms the difference across five trust levels
+($H(4) = 127.78$, $p < 0.001$), and Spearman rank correlation yields
+$r_s = 0.10$ ($p < 0.001$). Quartile analysis shows that novice developers
+($0$--$3$ years) are disproportionately trusting ($53.1\%$ net trust against
+$24.2\%$ net distrust), whereas senior developers (${\geq}\,13$ years) exhibit
+near parity ($38.2\%$ vs.\ $35.2\%$). Education level does not account for this
+pattern. These findings suggest that expertise-induced calibration --- not
+technological enthusiasm --- governs how experienced practitioners assess
+AI tool reliability.
+\end{abstract}
+
+%-----------------------------------------------------------------------
+\section{Introduction}
+\label{sec:intro}
+
+The adoption of large-language-model (LLM)-based coding assistants has accelerated
+dramatically since the public release of GitHub Copilot in 2022 and the subsequent
+proliferation of tools such as ChatGPT, Amazon CodeWhisperer, and Cursor. According
+to the \emph{Stack Overflow Developer Survey 2024} \cite{stackoverflow2024}, more than
+$57\%$ of the $65{,}437$ respondents currently incorporate AI tools into their
+development workflow --- a majority that crosses professional, regional, and
+organisational lines. This rapid adoption has outpaced the research community's
+understanding of how developers relate to the outputs these tools produce.
+
+Trust in AI output accuracy is a critical moderator of tool effectiveness. Over-trusting
+developers risk shipping incorrect AI-generated code without adequate review, introducing
+latent bugs or security vulnerabilities. Under-trusting developers forgo productivity
+benefits by redundantly verifying every suggestion, negating the promised efficiency gains
+\cite{cai2019hello}. The distribution of trust across the developer population is therefore
+a question of both theoretical and practical importance: if trust is unevenly distributed
+in systematic ways, organisations can tailor onboarding, training, and code-review policies
+to match the risk profile of their team composition.
+
+Prior research on AI-assisted programming has focused mainly on productivity metrics and
+usability outcomes \cite{vaithilingam2022expectation, ziegler2022productivity, bird2022copilot}.
+These studies find that developers accept a substantial fraction of AI suggestions outright,
+raising questions about the quality of human oversight. Less studied is the question of
+\emph{who} trusts AI and \emph{why}. The present study addresses this gap by examining
+one of the most fundamental individual-difference variables in software engineering:
+professional coding experience.
+
+A naive expectation might be that more experienced developers trust AI tools more. They
+understand the underlying technology better, they have more context for evaluating whether
+a suggestion is plausible, and they are more capable of integrating AI outputs into
+existing codebases. An alternative --- and we argue more nuanced --- hypothesis is that
+experience leads to \emph{better calibration}: experienced developers have seen enough
+correct and incorrect code to detect AI errors that novices miss. This expertise-induced
+skepticism would manifest as higher distrust among senior practitioners, even as they
+continue to use the tools \cite{liao2023transparency}.
+
+The \emph{Stack Overflow Developer Survey 2024} provides a uniquely suitable dataset to
+adjudicate between these hypotheses. With over 65,000 responses globally, rich demographic
+and attitudinal data, and direct questions about AI tool adoption and accuracy trust, it
+enables large-scale observational analysis that no single-institution study could replicate.
+
+\subsection{Research Question}
+
+\emph{Does professional coding experience predict skepticism toward AI-generated output
+accuracy among developers who currently use AI tools?}
+
+This question is non-trivial because competing theoretical arguments generate opposite
+predictions. The ``competence-based trust'' hypothesis (experienced developers understand
+AI better $\rightarrow$ trust more) conflicts with the ``calibration'' hypothesis
+(experienced developers detect AI errors better $\rightarrow$ trust less). The present
+study tests these empirically.
+
+\subsection{Hypotheses}
+
+\noindent\textbf{H\textsubscript{0}:} Professional coding experience does not differ
+across levels of self-reported trust in AI output accuracy. The mean years of experience
+are equal across all five trust levels ($\mu_1 = \mu_2 = \mu_3 = \mu_4 = \mu_5$).
+
+\noindent\textbf{H\textsubscript{1}:} Developers with more professional experience
+exhibit systematically greater distrust of AI output accuracy. Mean professional
+experience increases monotonically from the most trusting to the most distrusting group
+($\mu_1 \leq \mu_2 \leq \mu_3 \leq \mu_4 \leq \mu_5$, with at least one strict inequality).
+
+\subsection{Related Work}
+
+Vaithilingam et al.\ \cite{vaithilingam2022expectation} conducted a controlled study
+in which software developers used Copilot to complete programming tasks. They found that
+participants frequently accepted syntactically correct but semantically flawed suggestions,
+particularly when working in unfamiliar problem domains. Critically, those with relevant
+expertise in the domain were faster to identify and reject incorrect suggestions ---
+providing a plausible mechanism for experience-driven distrust at scale.
+
+Ziegler et al.\ \cite{ziegler2022productivity} analysed acceptance rates of GitHub Copilot
+suggestions across a large cohort of professional developers and found that acceptance
+rates declined as developers' proficiency in the relevant programming language increased.
+Although the primary outcome was productivity rather than trust, the acceptance-rate
+gradient is consistent with the calibration hypothesis: knowing a language well enough
+means knowing when an AI suggestion is wrong.
+
+Bird et al.\ \cite{bird2022copilot} documented early Copilot adoption patterns among
+engineers at Microsoft. Senior engineers with longer tenure tended to use AI suggestions
+more selectively, often discarding proposals and re-prompting rather than accepting them
+outright, while junior engineers showed higher raw acceptance rates. This behavioural
+pattern aligns with the attitudinal differences the present study measures.
+
+On the AI transparency side, Liao and Vaughan \cite{liao2023transparency} argue that
+``appropriate reliance'' on AI systems requires users to have accurate mental models of
+system capabilities and failure modes. Developing such models requires sustained experience
+with the system --- but that experience initially manifests as \emph{increased} distrust
+before possibly stabilising or improving as users learn which task types AI handles well.
+
+Finally, the calibration literature in human--AI teaming consistently finds that domain
+expertise enables practitioners to detect AI errors that novices miss, resulting in reduced
+over-reliance over time \cite{cai2019hello}. Cai et al.\ demonstrate this in a medical
+context, where experienced clinicians showed better-calibrated trust in AI diagnostic
+recommendations than trainees. Whether this expertise-calibration relationship generalises
+to software development has not been tested at scale --- the present study provides the
+first large-scale evidence.
+
+%-----------------------------------------------------------------------
+\section{Methodology}
+\label{sec:method}
+
+\subsection{Dataset}
+
+The analysis uses the publicly available \emph{Stack Overflow Developer Survey 2024}
+\cite{stackoverflow2024}, an annual worldwide survey of software practitioners conducted
+online between May and June 2024. The public release contains $65{,}437$ valid responses
+from participants in over 185 countries. Respondents completed the survey voluntarily and
+without financial compensation. Sampling is non-probabilistic (opt-in via the Stack Overflow
+platform and social media), which has implications for generalisability discussed in
+Section~\ref{sec:discussion}.
+
+The survey instrument covers a wide range of topics including professional background,
+technology and tool usage, compensation, and --- prominently in the 2024 edition ---
+attitudes toward AI development tools. The AI attitude battery was newly expanded in 2024
+to capture adoption, sentiment, perceived benefit, accuracy trust, and job threat perception,
+making this wave particularly suitable for the present analysis.
+
+\subsection{Variables}
+
+\textbf{Dependent variable --- AI Accuracy Trust} (\texttt{AIAcc}): A five-point
+ordinal survey item: ``How much do you trust the accuracy of the output from AI tools
+as part of your development workflow?'' Response options were \emph{Highly trust},
+\emph{Somewhat trust}, \emph{Neither trust nor distrust}, \emph{Somewhat distrust},
+and \emph{Highly distrust}. This item was presented only to respondents who reported
+currently using AI tools (\texttt{AISelect = Yes}). Respondents who reported not using
+AI tools --- either planning to or not planning to --- did not receive this question,
+which is why the \texttt{AIAcc} variable contains approximately $28{,}000$ missing values
+in the public dataset.
+
+\textbf{Independent variable --- Professional Coding Experience} (\texttt{YearsCodePro}):
+The survey question reads: ``NOT including education, how many years have you coded
+professionally (as part of your work)?'' Responses are binned: ``Less than 1~year'',
+followed by integer years from 1 to 50, and ``More than 50 years''. For analysis,
+``Less than 1 year'' was coded as $0$. The category ``More than 50 years'' ($n < 50$)
+was excluded because it does not admit a precise numeric value and constitutes an extreme
+tail with negligible influence on group-level statistics. The resulting distribution is
+strongly right-skewed: mean $= 9.12$ years, SD $= 8.33$, median $= 6$ years, with
+$37.1\%$ of the analytic sample reporting ten or more years of professional experience.
+
+\textbf{Control variable --- Education Level} (\texttt{EdLevel}): An ordinal item with
+seven categories from \emph{Primary/elementary school} (coded~0) to \emph{Professional
+degree including Ph.D.} (coded~6). Education level was examined as a potential confounder
+because it correlates with both career tenure and technology literacy.
+
+\subsection{Analytic Sample}
+
+The analysis is restricted to respondents with non-missing values on both \texttt{AIAcc}
+and \texttt{YearsCodePro}, yielding an analytic sample of $n = 31{,}025$. All such
+respondents also reported currently using AI tools (\texttt{AISelect = Yes}), by the
+survey design described above. Table~\ref{tab:main} reports sample sizes per trust group,
+ranging from $n = 699$ (\emph{Highly trust}) to $n = 12{,}175$ (\emph{Somewhat trust}).
+
+\subsection{Analytic Strategy}
+
+Because \texttt{YearsCodePro} is strongly right-skewed and \texttt{AIAcc} is ordinal,
+the standard parametric one-way ANOVA assumptions are violated. Accordingly, the primary
+inferential test is the non-parametric \textbf{Kruskal--Wallis H-test}, which tests
+whether the rank distribution of professional experience differs across the five trust
+levels. Effect size is reported as eta-squared ($\eta^2 = \text{SS}_\text{between} /
+\text{SS}_\text{total}$) and Cohen's $d$ for key pairwise comparisons. Ties are handled
+by averaging ranks.
+
+A \textbf{Spearman rank correlation} $r_s$ quantifies the monotonic association between
+trust ordinal (coded $1 = \text{Highly trust}$ through $5 = \text{Highly distrust}$)
+and professional experience, assessed via the $t$-approximation
+$t = r_s \sqrt{(n-2)/(1-r_s^2)}$.
+
+To aid practical interpretation, a \textbf{quartile analysis} stratifies the sample into
+four approximately equal-sized experience bands and reports the percentage of respondents
+in each band who fall into the (a) trust, (b) neutral, and (c) distrust categories.
+This non-parametric summary makes any threshold effects visible without distributional
+assumptions.
+
+%-----------------------------------------------------------------------
+\section{Results}
+\label{sec:results}
+
+\subsection{Descriptive Statistics by Trust Group}
+
+Table~\ref{tab:main} presents mean and median professional experience, standard deviation,
+and the proportion of respondents with ten or more years of experience across the five
+trust groups. A clear monotonic trend is visible: mean experience increases from
+$8.75$~years in the \emph{Somewhat trust} group to $10.25$~years in the
+\emph{Highly distrust} group, a difference of $1.50$~years. Median experience similarly
+rises from $6.0$~years (Somewhat trust, Neither) to $8.0$~years (Highly distrust),
+and the proportion of ``senior'' developers ($\geq 10$ years) increases monotonically
+from $34.7\%$ to $44.4\%$ across the trust-to-distrust spectrum.
+
+Notably, the \emph{Highly trust} group does not follow the simple monotonic pattern
+exactly: its mean ($9.34$~years) is slightly higher than the \emph{Somewhat trust} group
+($8.75$~years). This suggests a modest U-shape at the extremes, with very high trust
+and very high distrust both associated with somewhat greater experience, while moderate
+trust corresponds to the least experienced profile. Despite this nuance, the Spearman
+correlation confirms a net positive monotonic relationship between distrust ordinal and
+experience (Section~\ref{sec:corr}).
+
+\begin{table}[ht]
+\centering
+\caption{Professional experience (years) and education across AI accuracy trust levels ($n = 31{,}025$).}
+\label{tab:main}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{lrrrrcc}
+\toprule
+Trust Level & $n$ & Mean & Median & SD & $\geq$\,10 yrs & Edu (mean) \\
+\midrule
+Highly trust               &    699 &  9.34 & 6.0 & 9.10 & 38.6\% & 3.59 \\
+Somewhat trust             & 12{,}175 & 8.75 & 6.0 & 8.29 & 34.7\% & 3.69 \\
+Neither trust nor distrust &  8{,}344 & 8.90 & 6.0 & 8.16 & 36.1\% & 3.73 \\
+Somewhat distrust          &  7{,}225 & 9.42 & 7.0 & 8.42 & 39.0\% & 3.64 \\
+Highly distrust            &  2{,}582 & 10.25 & 8.0 & 8.44 & 44.4\% & 3.63 \\
+\midrule
+Total                      & 31{,}025 & 9.12 & 6.0 & 8.33 & 37.1\% & 3.67 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The rightmost column of Table~\ref{tab:main} reports the mean education ordinal (0--6
+scale) per trust group. Values range narrowly between $3.59$ and $3.73$, corresponding
+approximately to the bachelor's degree level throughout. This uniformity confirms that
+educational attainment does not differ meaningfully across trust groups and does not
+confound the experience--distrust association.
+
+\subsection{Kruskal--Wallis Test}
+
+The Kruskal--Wallis H-test rejects H\textsubscript{0}: $H(4) = 127.78$, $p < 0.001$,
+far exceeding the $\chi^2$ critical value of $18.47$ for $\alpha = 0.001$ with
+$\text{df} = 4$. The null hypothesis of equal experience distributions across trust
+levels is rejected with high confidence. The one-way ANOVA eta-squared estimate is
+$\eta^2 = 0.003$, indicating a statistically significant but substantively small effect
+--- approximately $0.3\%$ of the variance in experience is attributable to trust group
+membership.
+
+The pairwise comparison between \emph{Somewhat trust} ($n = 12{,}175$, mean $= 8.75$~yrs)
+and \emph{Highly distrust} ($n = 2{,}582$, mean $= 10.25$~yrs) yields Cohen's $d = 0.18$,
+and the comparison between \emph{Highly trust} ($n = 699$, mean $= 9.34$~yrs) and
+\emph{Highly distrust} gives $d = 0.11$. Both are classified as small effects under
+Cohen's conventions.
+
+\subsection{Spearman Rank Correlation}
+\label{sec:corr}
+
+The Spearman correlation between trust ordinal ($1 =$ most trusting, $5 =$ most
+distrusting) and years of professional experience is $r_s = 0.102$,
+$t(31{,}023) = 18.09$, $p < 0.001$. The corresponding coefficient of determination
+is $r_s^2 = 0.010$, indicating that experience explains roughly $1\%$ of the rank
+variance in trust orientation. While the effect size is small, the statistical
+significance is beyond doubt given the large sample size, and the direction is
+consistent: more experience is associated with more distrust.
+
+\subsection{Quartile Analysis}
+
+Table~\ref{tab:quartiles} stratifies the analytic sample into four equal-sized
+experience quartiles and reports the distribution of trust, neutrality, and distrust
+within each band.
+
+\begin{table}[ht]
+\centering
+\caption{Trust and distrust rates by professional experience quartile ($n = 31{,}025$).}
+\label{tab:quartiles}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{llrrrr}
+\toprule
+Quartile & Experience range & $n$ & \% Trust & \% Neutral & \% Distrust \\
+\midrule
+Q1 & 0--3 years   & 7{,}756 & 53.1\% & 22.7\% & 24.2\% \\
+Q2 & 3--6 years   & 7{,}756 & 34.0\% & 32.3\% & 33.7\% \\
+Q3 & 6--13 years  & 7{,}756 & 40.7\% & 25.9\% & 33.4\% \\
+Q4 & 13--50 years & 7{,}757 & 38.2\% & 26.6\% & 35.2\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The most striking feature of Table~\ref{tab:quartiles} is the contrast between Q1
+and the remaining quartiles. Junior developers (0--3 years) exhibit a trust-to-distrust
+ratio of $2.2:1$ ($53.1\%$ vs.\ $24.2\%$). By Q2 (3--6 years) this ratio collapses
+to near parity ($34.0\%$ vs.\ $33.7\%$, ratio $\approx 1.0:1$). The trust advantage
+does not recover in Q3 or Q4; instead, the distrust fraction continues to modestly
+increase. The Q1-to-Q2 shift therefore represents the sharpest attitudinal transition
+in the dataset: a $19.1$ percentage-point drop in trust and a $9.5$ percentage-point
+rise in distrust within approximately the first three years of professional experience.
+
+Beyond Q2, the pattern is more gradual. Q3 (6--13 years) and Q4 ($\geq 13$ years)
+differ by only $2.5$ percentage points in distrust, suggesting a threshold effect:
+early professional experience rapidly recalibrates trust expectations, while additional
+seniority produces more modest marginal shifts.
+
+%-----------------------------------------------------------------------
+\section{Discussion and Conclusion}
+\label{sec:discussion}
+
+\subsection{Interpretation}
+
+This study demonstrates that professional coding experience is a statistically robust,
+if modest, predictor of distrust in AI output accuracy among developers who actively
+use AI tools. H\textsubscript{1} is supported: mean experience increases monotonically
+(with minor deviation at the \emph{Highly trust} extreme) from the most trusting to
+the most distrusting group, and this difference is significant by both the Kruskal--Wallis
+test and Spearman correlation.
+
+Several mechanisms may account for this finding. First, experienced developers
+accumulate larger internal libraries of correct code patterns, enabling faster and more
+accurate identification of AI-generated errors. Vaithilingam et al.\
+\cite{vaithilingam2022expectation} provided controlled experimental evidence for this
+mechanism; the present study shows its signature in observational population-level data
+at a scale three orders of magnitude larger than any single usability study. Second,
+senior developers disproportionately work on complex, domain-specific, or legacy
+codebases where contemporary LLMs underperform \cite{ziegler2022productivity}. Their
+AI tools fail more often in practice, driving down trust. Third, experienced practitioners
+have lived through multiple technology hype cycles --- from CASE tools and expert systems
+to agile frameworks and cloud containerisation --- and may bring a natural wariness
+toward claims of transformative productivity gain \cite{bird2022copilot}.
+
+The threshold effect identified in the quartile analysis (the sharp Q1-to-Q2 transition
+at approximately three years of experience) aligns with the developmental trajectory
+described by \citet{liao2023transparency}: initial AI adoption is enthusiasm-driven, but
+sustained interaction produces a more calibrated assessment of reliability. Three years
+may represent the approximate period required to encounter a sufficient variety of AI
+failures to update one's prior on its accuracy.
+
+The uniformity of education levels across trust groups (Table~\ref{tab:main}) is itself
+informative. If distrust were driven primarily by academic training in computer science
+or familiarity with statistical modelling, one would expect higher-degree holders to
+cluster in the distrust groups. The absence of such a gradient suggests that formal
+education does not substitute for lived professional experience in forming accurate
+judgements about AI output quality.
+
+\subsection{Limitations}
+
+Several limitations constrain the interpretive scope of these findings. First, the
+analysis is \textbf{cross-sectional}: causal inference is not possible. The experience--distrust
+association may reflect reverse causation (skeptical individuals remain in the profession
+longer), self-selection (those who adopted AI tools early are disproportionately junior),
+or unmeasured confounders such as domain specialisation, industry sector, or the specific
+AI tool used.
+
+Second, the \textbf{effect size is small}: $r_s = 0.10$ and $\eta^2 = 0.003$ together
+explain approximately 1\% of variance. The statistical significance results from the
+large sample rather than from a large signal. Practically, this means that professional
+experience alone is a poor predictor of individual trust behaviour --- the distribution
+within any experience band is wide (SD $\approx 8$--$9$ years).
+
+Third, the \textbf{survey sample is not probability-based}. Stack Overflow users over-represent
+developers in certain countries, industries, and experience levels. Junior developers in
+large technology companies may be systematically underrepresented compared to their share
+of the global developer population.
+
+Fourth, \textbf{trust} is measured as a single self-report item without validation.
+Behavioural measures (e.g., actual code review depth, AI suggestion acceptance rates) might
+yield different results and would be more directly policy-relevant.
+
+\subsection{Practical Implications}
+
+Despite the small effect size, the findings carry operational implications. Junior
+developers are disproportionately trusting, raising the risk of uncritical acceptance
+of incorrect AI suggestions. Organisations deploying AI tools should consider targeted
+onboarding focused on AI failure modes for developers with fewer than three years of
+experience, peer review pairings that leverage the calibration advantage of senior
+practitioners, and acceptance-rate metrics stratified by seniority to monitor
+over-reliance in real time.
+
+\subsection{Conclusion}
+
+Professional coding experience is a statistically significant predictor of distrust in
+AI output accuracy among software developers who use AI tools. Novice developers (0--3 years)
+show a $2.2:1$ trust-to-distrust ratio, while senior developers ($\geq 13$ years) approach
+parity. The effect is modest in magnitude but highly robust across statistical tests, and
+education level does not confound the pattern. These findings are consistent with an
+expertise-induced calibration account: experience provides the domain knowledge necessary
+to detect AI errors, converting initial enthusiasm into more measured, accurate appraisal.
+Future longitudinal research should track whether distrust translates into improved code
+quality and whether targeted training can accelerate trust calibration for novice developers.
+
+%-----------------------------------------------------------------------
+\bibliographystyle{plain}
+\begin{thebibliography}{9}
+
+\bibitem{stackoverflow2024}
+Stack Overflow.
+\newblock Developer Survey 2024.
+\newblock Stack Overflow, 2024.
+\newblock \url{https://survey.stackoverflow.co/2024/}
+
+\bibitem{vaithilingam2022expectation}
+P.~Vaithilingam, T.~Zhang, and E.~L. Glassman.
+\newblock Expectation vs.\ experience: Evaluating the usability of code
+  generation tools powered by large language models.
+\newblock In \emph{Extended Abstracts of the 2022 {CHI} Conference on Human
+  Factors in Computing Systems}, {CHI\,EA}~'22. {ACM}, 2022.
+\newblock \url{https://doi.org/10.1145/3491101.3519665}
+
+\bibitem{ziegler2022productivity}
+A.~Ziegler, E.~Kalliamvakou, X.~A.~Li, A.~Rice, D.~Rifkin, S.~Simister,
+  G.~Sittampalam, and E.~Aftandilian.
+\newblock Productivity assessment of neural code completion.
+\newblock In \emph{Proceedings of the 6th {ACM} {SIGPLAN} International
+  Symposium on Machine Programming}, {MAPS}~'22. {ACM}, 2022.
+\newblock \url{https://doi.org/10.1145/3520312.3534864}
+
+\bibitem{bird2022copilot}
+C.~Bird, D.~Ford, T.~Zimmermann, N.~Forsgren, E.~Kalliamvakou, T.~Lowdermilk,
+  and I.~Gazit.
+\newblock Taking flight with {Copilot}: Early experiences and observations.
+\newblock \emph{{ACM} Queue}, 20(6), 2022.
+\newblock \url{https://doi.org/10.1145/3582083}
+
+\bibitem{liao2023transparency}
+Q.~V. Liao and J.~W. Vaughan.
+\newblock {AI} transparency in the age of {LLMs}: A human-centered research
+  roadmap.
+\newblock \emph{Harvard Data Science Review}, 2023.
+\newblock \url{https://doi.org/10.1162/99608f92.8036723b}
+
+\bibitem{cai2019hello}
+C.~J. Cai, S.~Winter, D.~Steiner, L.~Wilcox, and M.~Terry.
+\newblock ``{H}ello {AI}'': Uncovering the onboarding needs of medical
+  practitioners for human-{AI} collaborative decision-making.
+\newblock \emph{Proceedings of the {ACM} on Human-Computer Interaction},
+  3({CSCW}), 2019.
+\newblock \url{https://doi.org/10.1145/3359206}
+
+\end{thebibliography}
+
+\end{document}

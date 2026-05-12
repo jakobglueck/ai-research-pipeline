@@ -1,0 +1,26 @@
+# Large data files
+data/survey_results_public.csv
+db/survey.db
+
+# Compiled PDFs (build from source)
+experiment/experiment_output.pdf
+metareport/metareport.pdf
+
+# Claude Code settings
+.claude/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+
+# LaTeX intermediates
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.blg
+*.synctex.gz
+metareport/TU_Chemnitz_positiv_gruen.pdf
