@@ -118,7 +118,7 @@ The pipeline runs all five stages autonomously without further user input.
 |-----|-------------|-------------|
 | 1 | Privacy: real email injected from system context | Anonymous Author constraint |
 | 2 | QC declared PASS without executing code | STDOUT proof required |
-| 2 | Citations without reading abstracts | Abstract-Pflicht + Fetch-MCP |
+| 2 | Citations without reading abstracts | Abstract required via Fetch-MCP |
 | 3 | Effect sizes trivially small (f²=0.00033) | Effect-Size-Gate added |
 | 3 | Same research question as Run 2 | Interaction gate tightened (f²≥0.02) |
 | 3 | Dummy-coding rule overridden (**Reasoned Non-Compliance**) | Code assertions over text rules |
@@ -136,5 +136,5 @@ cd metareport && tectonic metareport.tex
 ## License
 
 MIT — code and pipeline instructions are free to reuse.
-The survey data belongs to Stack Overflow; see their
-[terms of use](https://stackoverflow.com/legal/public-data).
+The survey data belongs to Stack Overflow and is not included in this repository.
+Download it directly from [survey.stackoverflow.co/2024](https://survey.stackoverflow.co/2024/).
