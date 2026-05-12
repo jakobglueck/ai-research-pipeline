@@ -104,10 +104,17 @@ Create `.claude/settings.json` in this directory:
 
 ### Trigger
 
+The pipeline is available in two languages:
+
+| Language | Trigger file | Stage files |
+|----------|-------------|-------------|
+| 🇬🇧 English | `run_experiment_en.md` | `stages_en/` |
+| 🇩🇪 German | `run_experiment.md` | `stages/` |
+
 Open Claude Code in this directory and send:
 
 ```
-Read and execute completely: run_experiment.md
+Read and execute completely: run_experiment_en.md
 ```
 
 The pipeline runs all five stages autonomously without further user input.
