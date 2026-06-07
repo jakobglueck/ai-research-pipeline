@@ -8,36 +8,31 @@ Finde den Datensatz in `data/`, verstehe seine Struktur und importiere ihn in ei
 
 ## Schritte
 
-1. Erstelle folgende Verzeichnisse:
-   - `db/`, `scripts/`, `experiment_v2/figures/`, `logs/v2/`
+1. Erstelle folgende Verzeichnisse falls nicht vorhanden:
+   - `experiment_v2/figures/`, `logs/v2/`
+   - `db/` und `scripts/` existieren bereits von v1 — nicht neu anlegen
 
-2. Schau in `data/` — finde die CSV-Datei (egal wie sie heißt)
+2. **Datenbank prüfen (nicht neu importieren):**
+   - `db/survey.db` existiert bereits von Pipeline v1
+   - Prüfe via SQLite-MCP ob die DB korrekt befüllt ist:
+     - Zeilenanzahl, Spaltennamen, Schema
+     - Fehlende Werte pro Spalte
+   - Wenn DB leer oder nicht vorhanden: dann erst `scripts/setup_db.py` ausführen
+   - `scripts/mcp_helpers.py` existiert ebenfalls bereits — nicht überschreiben
 
-3. Analysiere die CSV:
-   - Spaltenanzahl, Spaltennamen, Datentypen
-   - Erste Zeilen lesen um den Inhalt zu verstehen
-   - Mögliche Zielvariablen identifizieren
+3. **Datensatz verstehen** (via SQLite-MCP, nicht via CSV):
+   - Was misst dieser Datensatz? Wer sind die Befragten?
+   - Welche Variablen sind numerisch, welche kategorial?
+   - Welche Variable eignet sich als Zielvariable?
+   - Welche Variablen könnten interessante Prädiktoren sein?
 
-4. Schreibe `scripts/setup_db.py` das:
-   - Die CSV in `db/survey.db` importiert (DB-Name immer `survey.db`)
-   - Numerische Spalten als REAL, Text als TEXT importiert
-   - Fehlende Werte als NULL behandelt (nicht als leere Strings)
-
-5. Führe das Script aus
-
-6. Schreibe `scripts/mcp_helpers.py` mit Hilfsfunktionen für:
-   - Mittelwert/SD pro Gruppe (SQLite hat kein STDDEV)
-   - Pearson-Korrelation zwischen zwei Spalten
-   - Missing-Value-Count pro Spalte
-   - Wertverteilung einer Spalte
-
-7. Prüfe via SQLite-MCP (DB-Pfad: `./db/survey.db`):
+4. Prüfe via SQLite-MCP (DB-Pfad: `./db/survey.db`):
    - Zeilenanzahl, Spaltennamen, Schema
    - Fehlende Werte pro Spalte
 
 ## LOG
 Erstelle `logs/v2/stage_0_log.md`:
-- Dateiname und Größe des gefundenen Datensatzes
+- Bestätigung dass DB existiert und korrekt befüllt ist
 - Kurze Beschreibung: Worum geht es in den Daten?
 - Schema (Spalten + Typen)
 - Fehlende Werte pro Spalte

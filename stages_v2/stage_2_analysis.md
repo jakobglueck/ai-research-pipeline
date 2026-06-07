@@ -23,7 +23,7 @@ Kombiniere SQLite-MCP (`./db/survey.db`) mit Python. Erlaubte Bibliotheken: `pan
 - Stichprobengröße für jede Analyse explizit angeben
 
 ### 3a. Pre-Processing — PFLICHTSCHRITT, darf nicht übersprungen werden
-Schreibe `scripts/preprocessing.py`:
+Schreibe `scripts/preprocessing_v2.py` (nicht preprocessing.py — v1 darf nicht überschrieben werden):
 - Identifiziere alle kategorialen und ordinalen Variablen im Modell
 - Für Likert-Skalen (1–5): Begründe **schriftlich im Log** ob ordinale oder
   kategoriale Behandlung (Dummies) gewählt wird. Eine Annahme ohne Begründung
@@ -31,6 +31,8 @@ Schreibe `scripts/preprocessing.py`:
 - Kategoriale Variablen → Dummy-Coding (One-Hot-Encoding), Referenzkategorie benennen
 - Führe das Script aus und kopiere den **rohen STDOUT** (Spaltennamen der
   kodierten Variablen) vollständig in `logs/v2/stage_2_log.md`
+- Alle weiteren Analysis-Scripts als `scripts/analysis_v2.py` speichern —
+  niemals bestehende Scripts (analysis.py, preprocessing.py) überschreiben
 - **Erst wenn der STDOUT im Log steht, darf Schritt 3b beginnen.**
 
 ### 3b. Hauptanalyse
