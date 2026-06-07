@@ -28,6 +28,22 @@ Schreibe `scripts/preprocessing_v3.py`:
 - Likert-Skalen: ordinale vs. kategoriale Behandlung begründen
 - Rohen STDOUT vollständig in `logs/v3/stage_2_log.md` kopieren
 
+## Schritt 3b — CoT Decision Pivots (PFLICHT vor jeder stat. Schlussfolgerung, neu in v3)
+
+Bevor du ein Ergebnis in den Log schreibst, durchlaufe explizit diese 4 Checkpoints
+als Scratchpad (Denkschritt, der im Log sichtbar ist):
+
+```
+CHECKPOINT 1 — Nullhypothese: "H0 lautet: [...]"
+CHECKPOINT 2 — Stichprobengröße bestätigt: "N = [...], Power-Schwelle erfüllt: JA/NEIN"
+CHECKPOINT 3 — Rohwert vor Korrektur: "p_roh = [...], nach BH-FDR: p_adj = [...]"
+CHECKPOINT 4 — Effektgröße und Richtung: "d/f²/Eta² = [...], Richtung: [...] (entspricht H1: JA/NEIN)"
+```
+
+Erst wenn alle 4 Checkpoints explizit dokumentiert sind, darf die Schlussfolgerung
+ins Log. Dieses Scratchpad fängt das häufigste LLM-Fehler: stilles Vorzeichen-
+wechseln und implizites Überspringen von Korrekturen. (Basis: arxiv:2510.09312)
+
 ## Schritt 4 — Hauptanalyse (PAP-konform)
 Führe die im PAP spezifizierte Methode durch. Schreibe `scripts/analysis_v3.py`:
 
@@ -73,6 +89,15 @@ med = pg.mediation_analysis(
 # Berichte: direkter Effekt c', indirekter Effekt a×b, 95% BCa CI des indirekten Effekts
 # Interpretation: vollständige / teilweise / keine Mediation
 ```
+
+**Self-Consistency für Mediationsschätzung (neu in v3):**
+Führe die pingouin.mediation_analysis() dreimal mit Seed 42, 123, 456 aus.
+Vergleiche die indirekten Effekte (a×b):
+- Wenn alle drei Werte innerhalb ±0.005 → hohe Konsistenz, Ergebnis vertrauenswürdig
+- Wenn Abweichung > 0.01 → Bootstrap-Instabilität, erhöhe n_boot auf 5000
+
+Berichte im Log: "Indirekter Effekt über 3 Seeds: [X.XX, X.XX, X.XX], Varianz: [Y]"
+(Basis: CISC, ACL 2025; Certified Self-Consistency, arxiv:2510.17472)
 
 ### 4g. Robustheitsprüfung — Multiverse (PFLICHT, neu in v3)
 Teste mindestens 5 verschiedene Spezifikationen:

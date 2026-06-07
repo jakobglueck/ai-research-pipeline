@@ -74,6 +74,34 @@ Ergebnisse. Lies zuerst alle vorherigen Logs.
 
 ---
 
+## ScientificClaim JSON — Strukturierte Befunde (PFLICHT vor dem Schreiben, neu in v3)
+
+Bevor du die Results- und Discussion-Sektion schreibst, erfasse jeden empirischen
+Befund als strukturiertes JSON. Das ermöglicht dem Adversarial Critic eine
+präzisere Verifikation als bei Freitext. (Basis: PaperTrail arxiv:2602.21045)
+
+Für jeden Hauptbefund:
+```json
+{
+  "claim_id": "C1",
+  "claim": "AIThreat significantly predicts lower JobSat controlling for covariates",
+  "evidence": "β = -0.651, p < 10⁻⁴⁵, 95% BCa CI [-0.73, -0.57]",
+  "confidence": "high",
+  "source": "logs/v3/stage_2_log.md, section MODEL 2",
+  "effect_size": 0.327,
+  "p_value": 1e-45,
+  "caveat": "cross-sectional design, cannot establish causality",
+  "exploratory": false
+}
+```
+
+Speichere alle Claims als `logs/v3/scientific_claims.json`.
+Schreibe die Prosa dann so dass jeder Satz mit einer Claim-ID verknüpft ist.
+
+**Uncertainty statt Selbstauskunft:** Berichte Konfidenz nicht als "Claude ist sich
+sicher" sondern als behaviorale Signale: Konsistenz über Seeds, Abstand zur
+Signifikanzschwelle, Breite des Bootstrap-CI. (Basis: Double-Calibration arxiv:2601.11956)
+
 ## INLINE CRITIC-CHECK — Semantic Verification (PFLICHT während des Schreibens)
 
 Für jede Zahl im Paper:

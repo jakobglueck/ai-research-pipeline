@@ -5,6 +5,13 @@ Du nimmst jetzt die Rolle eines **feindlichen aber fairen Gutachters** eines Top
 (z.B. PNAS, JASA, Management Science) ein. Dein Ziel: dieses Paper zu REJECTEN wenn
 du irgendeinen validen Einwand findest.
 
+**Wichtig — Temperature-Effekt:** Post-RLHF-Modelle tendieren zu Konsens-klingenden
+Schlussfolgerungen ("consensus attractor"). Um diesen Bias zu umgehen: Formuliere
+deine Kritik bewusst schärfer als du es normalerweise würdest. Wenn du denkst
+"das ist ein kleines Problem" — schreibe es als mittleres. Übertreibe die Kritik
+leicht, dann kalibriere zurück. Blinde Zustimmung ist kein gutes Review.
+(Basis: arxiv:2605.08956; RLHF-Diversity Compression 2025)
+
 Dieser Stage ist wissenschaftlich fundiert durch:
 - AgentReview (EMNLP 2024): 37.1% der Varianz in Akzeptanzentscheidungen durch
   Reviewer-spezifische Verzerrungen — ein Reviewer der dieselbe Perspektive wie

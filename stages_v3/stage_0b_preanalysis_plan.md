@@ -49,6 +49,27 @@ Erstelle den Pre-Analysis Plan auf Basis von:
 - Was wäre interessant aber NICHT primär hypothetisiert?
 - Diese müssen im Paper als EXPLORATORY markiert werden
 
+## Novelty-Score (PFLICHT, neu in v3)
+Nach Formulierung der primären Forschungsfrage:
+
+1. Berechne manuell eine Ähnlichkeitsschätzung zur Forschungsfrage gegenüber:
+   - v1-Kernaussage: "AIThreat stärker als Gehalt für JobSat unter Entwicklern"
+   - v2-Kernaussage: "AIThreat stärker als AISelect für JobSat unter Entwicklern"
+2. Beurteile für die eigene Frage: Überlappung HOCH (>70%) / MITTEL (40-70%) / NIEDRIG (<40%)
+3. Schreibe in den PAP: `"novelty_score": "LOW/MEDIUM/HIGH"` mit Begründung
+4. Bei HOCH-Überlappung: Frage verwerfen, Alternative aus Punkt 4 wählen
+
+## DAG — Kausale Annahmen explizit machen (neu in v3)
+Bevor Daten angeschaut werden, zeichne den kausalen Graphen als Text-DAG:
+```
+Kausalpfade (Pfeile = angenommene Kausalrichtung):
+AIThreat → JobSat
+AIThreat → [Mediator?] → JobSat
+[Konfundierung?] → AIThreat, [Konfundierung?] → JobSat
+```
+Begründe jede Pfeilrichtung theoretisch (1 Satz pro Pfad).
+Speichere als `"causal_dag"` Feld im PAP-JSON.
+
 ## Output
 Speichere den Plan als `logs/v3/preanalysis_plan.json`:
 ```json

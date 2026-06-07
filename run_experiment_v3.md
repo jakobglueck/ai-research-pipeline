@@ -16,6 +16,13 @@ Arbeite sequentiell: 0 → 0b → 1 → 2 → 2b → 3 → 4.
 | Counter-Narrative Search (Stage 3) | EviBound 2025: Pre-Falsification reduziert Hallucination auf 0% |
 | Reproducibility Artifacts (Stage 4) | REPRO-Bench ACL 2025; Open Science (arxiv:2412.17859) |
 | SQLite-MCP mit absolutem Pfad | Fix aus v2: relativer Pfad verhinderte MCP-Verbindung |
+| CoT Decision Pivots (4 Checkpoints) | arxiv:2510.09312: fängt stilles Vorzeichen-Wechseln + Korrekturfehler |
+| ScientificClaim JSON Schema | PaperTrail arxiv:2602.21045: strukturierte Befunde für präzisere Verifikation |
+| Novelty Score + DAG im PAP | SciMON ACL 2024: Ähnlichkeit zu v1/v2 messen, Kausalannahmen explizit |
+| Prompt Injection Sanitizer | OWASP LLM Top10 #1; arxiv:2605.17634: Fetch-Inhalte prüfen |
+| Self-Consistency für Mediation (3 Seeds) | CISC ACL 2025; arxiv:2510.17472: Bootstrap-Stabilität prüfen |
+| Adversarial Critic Anti-Consensus-Bias | arxiv:2605.08956: Post-RLHF drängt zu Konsens-Antworten |
+| Behavioral Uncertainty statt Selbstauskunft | arxiv:2601.11956: LLM-Konfidenz überschätzt um bis zu 30% |
 
 ## PRIVACY — gilt für alle Stages
 Author = immer `Anonymous Author`. Keine persönlichen Daten in Outputs.
