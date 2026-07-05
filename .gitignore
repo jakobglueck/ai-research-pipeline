@@ -11,10 +11,8 @@ experiment_v3/experiment_v3_output.tex
 # Metareport (old 7-stage version, superseded by v3 pipeline)
 metareport/
 
-# Presentation notes (personal)
-speaker_cheatsheet.md
-presentation_folienplan.md
-presentation_layout.md
+# Local/personal files (not part of the project)
+_local/
 
 # Claude Code settings
 .claude/
