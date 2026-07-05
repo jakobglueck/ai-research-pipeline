@@ -1,0 +1,124 @@
+{
+  "pipeline_version": "v3",
+  "author": "Anonymous Author",
+  "date": "2026-06-07",
+  "status": "LOCKED — deviations must be labeled EXPLORATORY",
+
+  "primary_rq": "Does trust in AI output accuracy (AIAcc) moderate the negative relationship between perceived AI job threat (AIThreat) and developer job satisfaction (JobSat)? Specifically: is the threat-satisfaction link stronger among developers who highly trust AI accuracy — because high trust makes the threat more credible?",
+
+  "theoretical_basis": "Cognitive threat appraisal theory (Lazarus & Folkman 1984) distinguishes credible from non-credible threats. A job threat perceived as credible — i.e., backed by trust in AI capability — should produce stronger negative affect and lower job satisfaction than a threat deemed unlikely to materialize. Developers who both feel threatened AND trust AI accuracy face a 'double-bind': they believe AI can do their job and worry it will replace them. Those who distrust AI accuracy can rationalize the threat away. Therefore, AIAcc should amplify (moderate) the AIThreat → JobSat pathway.",
+
+  "h0": "The negative effect of AIThreat on JobSat does not differ significantly across levels of AIAcc (interaction coefficient β_interaction = 0).",
+  "h1": "Among developers who highly trust AI accuracy (AIAcc = Highly trust), the negative relationship between AIThreat (Yes) and JobSat is significantly stronger (more negative) than among those who distrust AI accuracy (AIAcc = Highly distrust / Somewhat distrust). Formally: β_AIThreat×AIAcc < 0 (the interaction amplifies the threat effect for high-trust respondents).",
+  "expected_direction": "Negative moderation: higher AIAcc trust → stronger negative association between AIThreat and JobSat",
+
+  "novelty_vs_v1": "LOW",
+  "novelty_vs_v1_reason": "v1 tested AIThreat as a main-effect predictor of JobSat vs salary. v3 tests an interaction (moderation by AIAcc), which is structurally distinct — it asks not 'does AIThreat matter' but 'when does AIThreat matter most'. Different RQ structure, different statistical test.",
+
+  "novelty_vs_v2": "MEDIUM",
+  "novelty_vs_v2_reason": "v2 compared AIThreat vs AISelect as competing predictors. v3 still uses AIThreat but asks a conditional question (moderated by AIAcc). Overlap in focal variable (AIThreat), but the research question, design, and expected mechanism are distinct.",
+
+  "novelty_score": "MEDIUM",
+  "novelty_score_justification": "v3 introduces moderation (interaction) as the primary analytical frame — not previously tested in v1/v2. AIAcc as a theoretically-motivated moderator is novel. Score is MEDIUM (not LOW) because AIThreat remains a focal variable shared with v1/v2. No redesign required; MEDIUM overlap does not trigger rejection per protocol.",
+
+  "mediation_hypothesis": {
+    "mediator": "Frustration (operationalized as binary: has any listed frustration = 1, 'None of these' = 0)",
+    "pathway": "AIThreat → Frustration → JobSat",
+    "rationale": "Perceived AI job threat activates occupational uncertainty, which manifests as heightened workplace frustration (technical debt anxiety, tool-reliability concerns), which in turn reduces job satisfaction. This is a stress-buffering mediation pathway consistent with Job Demands-Resources theory (Bakker & Demerouti 2017).",
+    "expected": "partial",
+    "note": "Frustration is a secondary analysis; if Frustration missingness exceeds 60%, this analysis will be flagged EXPLORATORY in Stage 2."
+  },
+
+  "causal_dag": {
+    "description": "Pre-registered causal assumptions (arrows = assumed causal direction)",
+    "paths": [
+      {
+        "path": "AIThreat → JobSat",
+        "direction": "negative",
+        "justification": "Perceiving AI as a personal job threat induces occupational insecurity which reduces satisfaction — well-established in job insecurity literature (Cheng & Chan 2008)."
+      },
+      {
+        "path": "AIAcc → AIThreat × AIAcc → JobSat",
+        "direction": "amplification (negative moderation)",
+        "justification": "Trust in AI accuracy raises the credibility of AI-as-replacement — a credible threat is psychologically more damaging than a non-credible one (Cognitive threat appraisal theory)."
+      },
+      {
+        "path": "AIThreat → Frustration → JobSat",
+        "direction": "negative indirect",
+        "justification": "Threat perception activates stress responses that manifest as frustration with work conditions, which lowers satisfaction (JD-R model)."
+      },
+      {
+        "path": "WorkExp → AIThreat",
+        "direction": "negative",
+        "justification": "Experienced developers may feel more confident in irreplaceable skills, perceiving less AI threat — potential confound must be controlled."
+      },
+      {
+        "path": "WorkExp → JobSat",
+        "direction": "positive",
+        "justification": "Work experience correlates with seniority, autonomy, and compensation — established positive predictors of satisfaction."
+      },
+      {
+        "path": "YearsCodePro → JobSat",
+        "direction": "positive",
+        "justification": "Professional coding experience as proxy for specialization and market value — included as control."
+      },
+      {
+        "path": "AISelect → AIThreat",
+        "direction": "unknown / bidirectional possible",
+        "justification": "Current AI users may be more aware of AI capabilities (→ higher threat) OR have integrated AI successfully (→ lower threat). Direction ambiguous — controlled but not focal."
+      }
+    ]
+  },
+
+  "planned_method": "Moderated OLS regression (interaction model): JobSat ~ AIThreat_bin * AIAcc_ord + WorkExp + YearsCodePro + AISelect_bin",
+
+  "operationalizations": {
+    "JobSat": "Numeric 0–10 scale, outcome variable",
+    "AIThreat_bin": "Binary: 1 = Yes (perceives AI as job threat), 0 = No + I'm not sure (non-threat reference group). 'Unsure' collapsed to 0 following conservative coding — preregistered.",
+    "AIAcc_ord": "Ordinal 1–5: Highly distrust=1, Somewhat distrust=2, Neither=3, Somewhat trust=4, Highly trust=5",
+    "AISelect_bin": "Binary: 1 = Yes (currently uses AI tools), 0 = No/Plan to (non-user reference group)",
+    "WorkExp": "Continuous numeric (years), included as-is",
+    "YearsCodePro": "Continuous numeric (years), included as-is",
+    "Frustration_bin": "Binary mediator: 1 = any frustration selected, 0 = 'None of these' — multi-select items collapsed"
+  },
+
+  "covariates": ["WorkExp", "YearsCodePro", "AISelect_bin"],
+  "interaction_term": "AIThreat_bin × AIAcc_ord",
+
+  "missing_data_strategy": "Listwise deletion. Rationale: MCAR/MAR cannot be verified pre-analysis; listwise is the most transparent and conservative preregistered choice. Sensitivity analysis: multiple imputation (MICE, 5 imputations) will be reported as EXPLORATORY if sample size after listwise < 5,000.",
+
+  "alpha": 0.05,
+  "test_type": "two-tailed",
+  "minimum_effect_size": "f² ≥ 0.02 (small; Cohen 1988) for the interaction term specifically. OR Cohen's d ≥ 0.25 for group comparisons.",
+  "power_note": "With N ≈ 29,000 (JobSat non-null) and listwise deletion expected to reduce to ~10,000–15,000, power is >99% for f²=0.02 at α=0.05 — no power concern.",
+
+  "primary_test": "Significance of interaction term β_AIThreat×AIAcc in OLS regression",
+  "secondary_tests": [
+    "Simple slopes of AIThreat on JobSat at AIAcc levels 1, 3, 5 (Johnson-Neyman approach)",
+    "Baron-Kenny mediation: AIThreat → Frustration → JobSat with BCa bootstrap CIs (2000 iterations, pingouin)",
+    "BH-FDR correction across all p-values reported in Stage 2"
+  ],
+
+  "multiverse_specifications": [
+    "Spec 1 (primary): AIThreat binary × AIAcc ordinal 1–5, listwise deletion",
+    "Spec 2: AIThreat three-level (Yes/Unsure/No) as ordered factor",
+    "Spec 3: AIAcc binary (trust vs. distrust — collapse Highly+Somewhat on each side)",
+    "Spec 4: Include AISelect as additional covariate interaction with AIThreat",
+    "Spec 5: MICE-imputed dataset (5 imputations, pooled estimates)"
+  ],
+
+  "exploratory_analyses": [
+    "Does AIEthics concern (count of ethical concerns selected) predict JobSat beyond AIThreat?",
+    "Heterogeneity by DevType: Does the AIThreat × AIAcc interaction replicate within front-end, back-end, and full-stack developer subgroups?",
+    "Does AISent (overall AI sentiment) mediate or moderate the AIThreat → JobSat relationship?",
+    "Salary-controlled replication: Does the interaction hold in the subset with non-null ConvertedCompYearly (N ≈ 23,000)?",
+    "Country-level clustering: Does the interaction vary significantly across top-10 countries by respondent count?"
+  ],
+
+  "alternative_rqs_if_primary_fails_novelty_check": [
+    "Alt A: Does the alignment between AI capability perception (AIComplex) and actual AI adoption (AISelect) predict job satisfaction via a cognitive dissonance mechanism?",
+    "Alt B: Does overall AI ethical concern count (AIEthics items) predict job satisfaction more strongly than AI threat perception among current AI users?"
+  ],
+
+  "reporting_plan": "All preregistered analyses labeled CONFIRMATORY. All analyses not listed here labeled EXPLORATORY. Effect sizes (Cohen's f², d) and 95% BCa bootstrap CIs reported for all primary tests. CONSORT-style flow diagram for sample selection."
+}
