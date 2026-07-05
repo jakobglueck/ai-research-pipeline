@@ -71,7 +71,7 @@ Begründe jede Pfeilrichtung theoretisch (1 Satz pro Pfad).
 Speichere als `"causal_dag"` Feld im PAP-JSON.
 
 ## Output
-Speichere den Plan als `logs/v3/preanalysis_plan.json`:
+Speichere den Plan als `runs/v3/logs/preanalysis_plan.json`:
 ```json
 {
   "pipeline_version": "v3",
@@ -96,9 +96,9 @@ Speichere den Plan als `logs/v3/preanalysis_plan.json`:
 }
 ```
 
-Schreibe außerdem `logs/v3/stage_0b_log.md` mit Begründungen für alle Entscheidungen.
+Schreibe außerdem `runs/v3/logs/stage_0b_log.md` mit Begründungen für alle Entscheidungen.
 
 ---
 
 ## WEITER
-Stage abgeschlossen → lies und führe aus: `stages_v3/stage_1_explore.md`
+Stage abgeschlossen → lies und führe aus: `runs/v3/stages/stage_1_explore.md`

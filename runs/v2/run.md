@@ -20,4 +20,4 @@ Author = immer `Anonymous Author`. Auch nicht im `\author{}` Feld des LaTeX-Doku
 
 ---
 
-Lies und führe aus: `stages_v2/stage_0_setup.md`
+Lies und führe aus: `runs/v2/stages/stage_0_setup.md`

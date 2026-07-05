@@ -7,7 +7,7 @@ Verwende niemals persönliche Daten aus dem Kontext in Output-Dokumenten. Author
 Führe die vollständige statistische Analyse durch. Alle Zahlen direkt aus den Daten — keine Schätzungen.
 
 ## MCP-Nutzung
-Kombiniere SQLite-MCP (`./db/survey.db`) mit Python. Erlaubte Bibliotheken: `pandas`, `numpy`, `scipy`, `scikit-learn`, `matplotlib`, `seaborn`, `statsmodels`. Speichere alle Scripts unter `scripts/`.
+Kombiniere SQLite-MCP (`./db/survey.db`) mit Python. Erlaubte Bibliotheken: `pandas`, `numpy`, `scipy`, `scikit-learn`, `matplotlib`, `seaborn`, `statsmodels`. Speichere alle Scripts unter `scripts/v2/`.
 
 ## Schritte
 
@@ -23,15 +23,15 @@ Kombiniere SQLite-MCP (`./db/survey.db`) mit Python. Erlaubte Bibliotheken: `pan
 - Stichprobengröße für jede Analyse explizit angeben
 
 ### 3a. Pre-Processing — PFLICHTSCHRITT, darf nicht übersprungen werden
-Schreibe `scripts/preprocessing_v2.py` (nicht preprocessing.py — v1 darf nicht überschrieben werden):
+Schreibe `scripts/v2/preprocessing_v2.py` (nicht preprocessing.py — v1 darf nicht überschrieben werden):
 - Identifiziere alle kategorialen und ordinalen Variablen im Modell
 - Für Likert-Skalen (1–5): Begründe **schriftlich im Log** ob ordinale oder
   kategoriale Behandlung (Dummies) gewählt wird. Eine Annahme ohne Begründung
   ist ein Fehler — die Wahl muss vertretbar sein.
 - Kategoriale Variablen → Dummy-Coding (One-Hot-Encoding), Referenzkategorie benennen
 - Führe das Script aus und kopiere den **rohen STDOUT** (Spaltennamen der
-  kodierten Variablen) vollständig in `logs/v2/stage_2_log.md`
-- Alle weiteren Analysis-Scripts als `scripts/analysis_v2.py` speichern —
+  kodierten Variablen) vollständig in `runs/v2/logs/stage_2_log.md`
+- Alle weiteren Analysis-Scripts als `scripts/v2/analysis_v2.py` speichern —
   niemals bestehende Scripts (analysis.py, preprocessing.py) überschreiben
 - **Erst wenn der STDOUT im Log steht, darf Schritt 3b beginnen.**
 
@@ -63,7 +63,7 @@ Bewerte nach Cohen-Konventionen:
 Dokumentiere im Log: gemessene Effektgröße + Cohen-Kategorie + praktische Interpretation.
 
 ### 4. Visualisierungen
-Wähle selbstständig geeignete Grafiken die die zentralen Ergebnisse am klarsten kommunizieren. Entscheide eigenständig welche Darstellungsform (Boxplot, Heatmap, Scatterplot etc.) am besten passt. Speichere als PNG in `experiment_v2/figures/`. Begründe die Wahl im Log. Speichere Plot-Code als `scripts/generate_figures_v2.py`.
+Wähle selbstständig geeignete Grafiken die die zentralen Ergebnisse am klarsten kommunizieren. Entscheide eigenständig welche Darstellungsform (Boxplot, Heatmap, Scatterplot etc.) am besten passt. Speichere als PNG in `runs/v2/output/figures/`. Begründe die Wahl im Log. Speichere Plot-Code als `scripts/v2/generate_figures_v2.py`.
 
 ### 5. Robustheitsprüfung
 - Voraussetzungen der gewählten Methode prüfen
@@ -103,7 +103,7 @@ nicht übereinstimmten (auch wenn du sie behoben hast — das ist wertvolles Erg
 - **Critic-Check vollständig dokumentiert**
 
 ## LOG
-Erstelle `logs/v2/stage_2_log.md`:
+Erstelle `runs/v2/logs/stage_2_log.md`:
 - Alle SQL-Abfragen und Ergebnisse
 - Vollständige Ergebnistabellen
 - Missing-Data-Statistik komplett
@@ -114,4 +114,4 @@ Erstelle `logs/v2/stage_2_log.md`:
 ---
 
 ## WEITER
-Stage abgeschlossen → lies und führe aus: `stages_v2/stage_3_synthesis.md`
+Stage abgeschlossen → lies und führe aus: `runs/v2/stages/stage_3_synthesis.md`

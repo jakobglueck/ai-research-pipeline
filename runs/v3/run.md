@@ -33,4 +33,4 @@ DB (`db/survey.db`) nicht neu importieren — existiert bereits.
 
 ---
 
-Lies und führe aus: `stages_v3/stage_0_setup.md`
+Lies und führe aus: `runs/v3/stages/stage_0_setup.md`

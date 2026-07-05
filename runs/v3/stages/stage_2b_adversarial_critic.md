@@ -20,7 +20,7 @@ Dieser Stage ist wissenschaftlich fundiert durch:
   methodischer Schwächen.
 
 ## Aufgabe
-Lies `logs/v3/stage_2_log.md` und `logs/v3/preanalysis_plan.json`.
+Lies `runs/v3/logs/stage_2_log.md` und `runs/v3/logs/preanalysis_plan.json`.
 Antworte auf diese 6 Punkte — ohne Rücksicht auf eigene frühere Arbeit:
 
 ---
@@ -78,7 +78,7 @@ Für jeden HOCH-bewerteten Punkt:
 ---
 
 ## LOG
-Erstelle `logs/v3/adversarial_critic_log.md`:
+Erstelle `runs/v3/logs/adversarial_critic_log.md`:
 - Alle 6 Review-Punkte mit Bewertung
 - Reaktion auf alle HOCH-bewerteten Punkte
 - Ob Zusatzanalysen durchgeführt wurden
@@ -87,4 +87,4 @@ Erstelle `logs/v3/adversarial_critic_log.md`:
 ---
 
 ## WEITER
-Stage abgeschlossen → lies und führe aus: `stages_v3/stage_3_synthesis.md`
+Stage abgeschlossen → lies und führe aus: `runs/v3/stages/stage_3_synthesis.md`

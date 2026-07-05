@@ -6,9 +6,9 @@ import re
 import sys
 import json
 
-PAPER_PATH = "experiment_v3/experiment_v3_output.tex"
-LOG_PATH = "logs/v3/stage_2_log.md"
-PAP_PATH = "logs/v3/preanalysis_plan.json"
+PAPER_PATH = "runs/v3/output/experiment_v3_output.tex"
+LOG_PATH = "runs/v3/logs/stage_2_log.md"
+PAP_PATH = "runs/v3/logs/preanalysis_plan.json"
 
 print("=" * 65)
 print("PIPELINE V3 — AUTOMATED QC CHECK")

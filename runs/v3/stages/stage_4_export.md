@@ -8,10 +8,10 @@ QC-Check, LaTeX-Kompilierung, Reproducibility-Artifacts exportieren.
 
 ## Schritt 1 — Automatisierter QC (PFLICHT)
 
-Schreibe `scripts/qc_check_v3.py`:
-- Lese `experiment_v3/experiment_v3_output.tex` + `logs/v3/stage_2_log.md`
+Schreibe `scripts/v3/qc_check_v3.py`:
+- Lese `runs/v3/output/experiment_v3_output.tex` + `runs/v3/logs/stage_2_log.md`
 - Prüfe via Regex alle zentralen Zahlen (N, Cohen's d, Bootstrap-CI, p-Werte, R², β)
-- Führe das Script aus und kopiere vollständigen STDOUT in `logs/v3/stage_4_log.md`
+- Führe das Script aus und kopiere vollständigen STDOUT in `runs/v3/logs/stage_4_log.md`
 
 **Erweiterte QC-Checks (neu in v3):**
 - [ ] Citation Count ≥ 15 (zähle `\bibitem` oder `\cite` im .tex)
@@ -32,28 +32,28 @@ Kein PASS ohne STDOUT-Beweis.
 ## Schritt 2 — Reproducibility Artifacts exportieren (neu in v3)
 
 Exportiere folgende Dateien für maximale Reproduzierbarkeit:
-1. `logs/v3/analysis_queries.sql` — alle sqlite3-Queries aus Stage 2 als SQL-Script
-2. `logs/v3/prisma_flow.md` — PRISMA-Flow aus Stage 1 als eigenständiges Dokument
-3. `logs/v3/preanalysis_plan.json` — bereits aus Stage 0b vorhanden, bestätigen
+1. `runs/v3/logs/analysis_queries.sql` — alle sqlite3-Queries aus Stage 2 als SQL-Script
+2. `runs/v3/logs/prisma_flow.md` — PRISMA-Flow aus Stage 1 als eigenständiges Dokument
+3. `runs/v3/logs/preanalysis_plan.json` — bereits aus Stage 0b vorhanden, bestätigen
 
 ## Schritt 3 — LaTeX kompilieren
 ```bash
-tectonic experiment_v3/experiment_v3_output.tex
+tectonic runs/v3/output/experiment_v3_output.tex
 ```
 Fehler korrigieren, nochmal kompilieren. Alle Fehler im Log dokumentieren.
 
 ## Schritt 4 — Speichern
-Finales Paper: `experiment_v3/experiment_v3_output.tex` + `.pdf`
+Finales Paper: `runs/v3/output/experiment_v3_output.tex` + `.pdf`
 
 ## LOG
-Erstelle `logs/v3/stage_4_log.md`:
+Erstelle `runs/v3/logs/stage_4_log.md`:
 - Vollständiger QC-STDOUT
 - Ergebnis aller erweiterten Checks (✓/✗)
 - LaTeX-Fehler und Korrekturen
 - Gesamtdauer (geschätzt)
 - Anzahl menschlicher Eingriffe
 
-Erstelle `logs/v3/experiment_v3_summary.md`:
+Erstelle `runs/v3/logs/experiment_v3_summary.md`:
 
 ### Pipeline-Statistik
 - SQL-Abfragen gesamt
@@ -77,4 +77,4 @@ Erstelle `logs/v3/experiment_v3_summary.md`:
 ---
 
 ## PIPELINE V3 ABGESCHLOSSEN
-Alle Outputs in `experiment_v3/`, Logs in `logs/v3/`.
+Alle Outputs in `runs/v3/output/`, Logs in `runs/v3/logs/`.

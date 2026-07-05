@@ -7,7 +7,7 @@ Verwende niemals persönliche Daten aus dem Kontext in Output-Dokumenten. Author
 Exploriere den Datensatz via SQLite-MCP und Python, und entwickle eine überraschende, kontra-intuitive Forschungsfrage die auf echten Datenmustern basiert.
 
 ## MCP-Nutzung
-Nutze `scripts/mcp_helpers.py` für Berechnungen die SQL alleine nicht leisten kann. Erweitere die Helferklassen wenn nötig. SQLite-MCP Pfad: `./db/survey.db`.
+Nutze `scripts/v1/mcp_helpers.py` für Berechnungen die SQL alleine nicht leisten kann. Erweitere die Helferklassen wenn nötig. SQLite-MCP Pfad: `./db/survey.db`.
 
 ## Schritte
 
@@ -107,7 +107,7 @@ Dokumentiere alle verworfenen Quellen mit Grund.
 ---
 
 ## LOG
-Erstelle `logs/v2/stage_1_log.md`:
+Erstelle `runs/v2/logs/stage_1_log.md`:
 - Alle SQL-Abfragen und Ergebnisse
 - Gefundene Muster und Anomalien
 - Warum diese Forschungsfrage interessanter ist als die offensichtliche
@@ -118,4 +118,4 @@ Erstelle `logs/v2/stage_1_log.md`:
 ---
 
 ## WEITER
-Stage abgeschlossen → lies und führe aus: `stages_v2/stage_2_analysis.md`
+Stage abgeschlossen → lies und führe aus: `runs/v2/stages/stage_2_analysis.md`

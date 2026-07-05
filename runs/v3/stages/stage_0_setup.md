@@ -9,7 +9,7 @@ Verzeichnisse anlegen, DB prüfen, Existenz bestehender Scripts bestätigen.
 ## Schritte
 
 1. Erstelle folgende Verzeichnisse falls nicht vorhanden:
-   - `experiment_v3/figures/`, `logs/v3/`
+   - `runs/v3/output/figures/`, `runs/v3/logs/`
    - `db/` und `scripts/` existieren bereits — nicht neu anlegen
 
 2. **Datenbank prüfen (nicht neu importieren):**
@@ -17,7 +17,7 @@ Verzeichnisse anlegen, DB prüfen, Existenz bestehender Scripts bestätigen.
    - Prüfe via sqlite3 Bash:
      - Zeilenanzahl, Spaltennamen, Schema
      - Fehlende Werte pro Spalte
-   - Wenn DB leer oder nicht vorhanden: `scripts/setup_db.py` ausführen
+   - Wenn DB leer oder nicht vorhanden: `scripts/v1/setup_db.py` ausführen
 
 3. Datensatz via sqlite3 verstehen:
    - Welche Variablen sind numerisch, welche kategorial?
@@ -28,7 +28,7 @@ Verzeichnisse anlegen, DB prüfen, Existenz bestehender Scripts bestätigen.
    Niemals bestehende Scripts (v1/v2) überschreiben.
 
 ## LOG
-Erstelle `logs/v3/stage_0_log.md`:
+Erstelle `runs/v3/logs/stage_0_log.md`:
 - DB-Status (Zeilenanzahl, Schema-Check)
 - Identifizierte Zielvariablen
 - Identifizierte mögliche Mediator-Variablen
@@ -36,4 +36,4 @@ Erstelle `logs/v3/stage_0_log.md`:
 ---
 
 ## WEITER
-Stage abgeschlossen → lies und führe aus: `stages_v3/stage_0b_preanalysis_plan.md`
+Stage abgeschlossen → lies und führe aus: `runs/v3/stages/stage_0b_preanalysis_plan.md`

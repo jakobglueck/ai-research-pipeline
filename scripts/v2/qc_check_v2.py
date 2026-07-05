@@ -1,13 +1,13 @@
 """
 qc_check_v2.py
 Stage 4 quality-control check for pipeline v2.
-Reads experiment_v2/experiment_v2_output.tex and logs/v2/stage_2_log.md,
+Reads runs/v2/output/experiment_v2_output.tex and runs/v2/logs/stage_2_log.md,
 verifies that key numbers in the paper match the log via regex string matching.
 """
 import os, re, sys
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-TEX_PATH  = os.path.join(BASE, "experiment_v2", "experiment_v2_output.tex")
+TEX_PATH  = os.path.join(BASE, "runs", "v2", "output", "experiment_v2_output.tex")
 LOG2_PATH = os.path.join(BASE, "logs", "v2", "stage_2_log.md")
 
 # ------------------------------------------------------------------

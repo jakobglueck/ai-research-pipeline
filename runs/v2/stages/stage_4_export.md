@@ -11,12 +11,12 @@ Konsistenzprüfung, LaTeX kompilieren, finalen Output speichern.
 ### 1. Konsistenzprüfung — QC muss Beweis liefern, keine Selbstbehauptung
 
 **Automatisierter Beweis (Pflicht):**
-Schreibe `scripts/qc_check_v2.py`:
-- Lese `experiment_v2/experiment_v2_output.tex` und `logs/v2/stage_2_log.md` ein
+Schreibe `scripts/v2/qc_check_v2.py`:
+- Lese `runs/v2/output/experiment_v2_output.tex` und `runs/v2/logs/stage_2_log.md` ein
 - Prüfe per Regex/String-Matching ob die zentralen Zahlen (N, p-Werte, R²,
   b-Koeffizienten, SE-Werte) exakt übereinstimmen
 - Führe das Script aus
-- Kopiere den **vollständigen rohen STDOUT** in `logs/v2/stage_4_log.md`
+- Kopiere den **vollständigen rohen STDOUT** in `runs/v2/logs/stage_4_log.md`
 - Kein „PASS" ohne Terminal-Output. Ein „PASS" ohne Beweis ist kein QC.
 
 **Manuelle Prüfliste (danach):**
@@ -25,26 +25,26 @@ Schreibe `scripts/qc_check_v2.py`:
 - Quellenscodes im Log stimmen mit References im Paper überein?
 - Author = `Anonymous Author`?
 - Genau 6 Seiten?
-- Critic-Check-Einträge in logs/v2/stage_1_log.md, stage_2_log.md, stage_3_log.md vorhanden?
+- Critic-Check-Einträge in runs/v2/logs/stage_1_log.md, stage_2_log.md, stage_3_log.md vorhanden?
 
 ### 2. LaTeX kompilieren
 ```bash
-pdflatex -interaction=nonstopmode experiment_v2/experiment_v2_output.tex
+pdflatex -interaction=nonstopmode runs/v2/output/experiment_v2_output.tex
 ```
 
 Fehler korrigieren und erneut kompilieren. Alle Fehler im Log dokumentieren.
 
 ### 3. Speichern
-Finales Paper: `experiment_v2/experiment_v2_output.tex`
+Finales Paper: `runs/v2/output/experiment_v2_output.tex`
 
 ## LOG
-Erstelle `logs/v2/stage_4_log.md`:
+Erstelle `runs/v2/logs/stage_4_log.md`:
 - Gefundene und korrigierte Inkonsistenzen
 - LaTeX-Fehler und Korrekturen
 - Gesamtdauer (geschätzt)
 - Anzahl menschlicher Eingriffe
 
-Erstelle `logs/v2/experiment_v2_summary.md`:
+Erstelle `runs/v2/logs/experiment_v2_summary.md`:
 
 ### Pipeline-Statistik
 - SQL-Abfragen gesamt
@@ -63,4 +63,4 @@ Erstelle `logs/v2/experiment_v2_summary.md`:
 ---
 
 ## PIPELINE V2 ABGESCHLOSSEN
-Alle Outputs in `experiment_v2/`, Logs in `logs/v2/`.
+Alle Outputs in `runs/v2/output/`, Logs in `runs/v2/logs/`.

@@ -15,7 +15,7 @@ import matplotlib.patches as mpatches
 import seaborn as sns
 from preprocessing_v3 import load_and_preprocess
 
-FIGURE_DIR = "experiment_v3/figures"
+FIGURE_DIR = "runs/v3/output/figures"
 os.makedirs(FIGURE_DIR, exist_ok=True)
 
 df, df_main, df_med = load_and_preprocess()
@@ -157,4 +157,4 @@ plt.savefig(f"{FIGURE_DIR}/fig3_mediation_diagram.png", dpi=150, bbox_inches='ti
 plt.close()
 print("Figure 3 saved.")
 
-print("\nAll figures saved to experiment_v3/figures/")
+print("\nAll figures saved to runs/v3/output/figures/")

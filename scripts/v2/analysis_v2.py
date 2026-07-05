@@ -16,7 +16,7 @@ from statsmodels.stats.outliers_influence import variance_inflation_factor
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DB_PATH = os.path.join(BASE, "db", "survey.db")
-SAMPLE_PATH = os.path.join(BASE, "experiment_v2", "analytic_sample_v2.csv")
+SAMPLE_PATH = os.path.join(BASE, "runs", "v2", "output", "analytic_sample_v2.csv")
 
 
 def cohens_d(a, b):

@@ -8,7 +8,7 @@ Author = `Anonymous Author`. Keine persönlichen Daten in Outputs.
 Führe eine systematische PRISMA-lite Literatursuche durch (20–25 Quellen).
 
 ## Schritt 1 — Pre-Analysis Plan lesen
-Lies `logs/v3/preanalysis_plan.json`. Die Forschungsfrage ist bereits festgelegt.
+Lies `runs/v3/logs/preanalysis_plan.json`. Die Forschungsfrage ist bereits festgelegt.
 **Du darfst die primäre Hypothese nicht ändern** — wenn du jetzt Muster siehst die
 eine andere Frage interessanter machen, dokumentiere sie als EXPLORATORISCH.
 
@@ -26,7 +26,7 @@ und Mediator → Outcome (b-Pfad). Beide müssen plausibel sein.
 
 ## Schritt 3 — Explorative SQL-Queries (optional)
 Nur wenn der Gate bestanden ist: exploriere weitere Muster für die Discussion.
-Label alles als EXPLORATORY in `logs/v3/stage_1_log.md`.
+Label alles als EXPLORATORY in `runs/v3/logs/stage_1_log.md`.
 
 ## Schritt 4 — PRISMA-lite Literatursuche (PFLICHT: 15–25 Quellen)
 
@@ -80,7 +80,7 @@ Für jede der final ausgewählten Quellen:
 Nur JA-Quellen kommen ins Paper.
 
 ## LOG
-Erstelle `logs/v3/stage_1_log.md`:
+Erstelle `runs/v3/logs/stage_1_log.md`:
 - PRISMA-Flow (N_identified → N_screened → N_included)
 - Alle 30 Kandidaten mit INCLUDE/EXCLUDE/Begründung
 - Datenextraktionstabelle aller INCLUDEd Papers
@@ -91,4 +91,4 @@ Erstelle `logs/v3/stage_1_log.md`:
 ---
 
 ## WEITER
-Stage abgeschlossen → lies und führe aus: `stages_v3/stage_2_analysis.md`
+Stage abgeschlossen → lies und führe aus: `runs/v3/stages/stage_2_analysis.md`

@@ -9,12 +9,12 @@ Alle Scripts als `_v3`-Suffix — niemals v1/v2-Scripts überschreiben.
 
 ## MCP-Nutzung
 sqlite3 via Bash + Python. Bibliotheken: `pandas`, `numpy`, `scipy`, `statsmodels`,
-`pingouin`, `matplotlib`, `seaborn`. Speichere alle Scripts unter `scripts/`.
+`pingouin`, `matplotlib`, `seaborn`. Speichere alle Scripts unter `scripts/v3/`.
 
 ---
 
 ## Schritt 1 — Pre-Analysis Plan laden
-Lies `logs/v3/preanalysis_plan.json`. Die geplante Methode und Kovariaten sind dort
+Lies `runs/v3/logs/preanalysis_plan.json`. Die geplante Methode und Kovariaten sind dort
 spezifiziert. Halte dich daran — jede Abweichung im Paper als EXPLORATORY markieren.
 
 ## Schritt 2 — Missing-Data-Analyse
@@ -23,10 +23,10 @@ spezifiziert. Halte dich daran — jede Abweichung im Paper als EXPLORATORY mark
 - Strategie wie im PAP spezifiziert anwenden + begründen
 
 ## Schritt 3 — Pre-Processing
-Schreibe `scripts/preprocessing_v3.py`:
+Schreibe `scripts/v3/preprocessing_v3.py`:
 - Kategoriale Variablen → Dummy-Coding, Referenzkategorie benennen
 - Likert-Skalen: ordinale vs. kategoriale Behandlung begründen
-- Rohen STDOUT vollständig in `logs/v3/stage_2_log.md` kopieren
+- Rohen STDOUT vollständig in `runs/v3/logs/stage_2_log.md` kopieren
 
 ## Schritt 3b — CoT Decision Pivots (PFLICHT vor jeder stat. Schlussfolgerung, neu in v3)
 
@@ -45,7 +45,7 @@ ins Log. Dieses Scratchpad fängt das häufigste LLM-Fehler: stilles Vorzeichen-
 wechseln und implizites Überspringen von Korrekturen. (Basis: arxiv:2510.09312)
 
 ## Schritt 4 — Hauptanalyse (PAP-konform)
-Führe die im PAP spezifizierte Methode durch. Schreibe `scripts/analysis_v3.py`:
+Führe die im PAP spezifizierte Methode durch. Schreibe `scripts/v3/analysis_v3.py`:
 
 ### 4a. Deskriptive Statistik
 - Mittelwert, SD, Min, Median, Max stratifiziert nach Zielvariable
@@ -121,7 +121,7 @@ from statsmodels.stats.diagnostic import het_breuschpagan
 ```
 
 ## Schritt 5 — Visualisierungen
-3 Abbildungen nach `experiment_v3/figures/`. Code als `scripts/generate_figures_v3.py`.
+3 Abbildungen nach `runs/v3/output/figures/`. Code als `scripts/v3/generate_figures_v3.py`.
 
 ---
 
@@ -143,7 +143,7 @@ Verifikation des indirekten Effekts: manuell a×b berechnen und gegen pingouin-O
 ---
 
 ## LOG
-Erstelle `logs/v3/stage_2_log.md`:
+Erstelle `runs/v3/logs/stage_2_log.md`:
 - Vollständige Script-Outputs
 - Mediationsanalyse-Ergebnisse (alle Pfade a, b, c, c')
 - Bootstrap-CIs
@@ -155,4 +155,4 @@ Erstelle `logs/v3/stage_2_log.md`:
 ---
 
 ## WEITER
-Stage abgeschlossen → lies und führe aus: `stages_v3/stage_2b_adversarial_critic.md`
+Stage abgeschlossen → lies und führe aus: `runs/v3/stages/stage_2b_adversarial_critic.md`

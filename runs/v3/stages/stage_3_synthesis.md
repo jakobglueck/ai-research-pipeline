@@ -8,11 +8,11 @@ Schreibe ein vollständiges wissenschaftliches Paper auf Basis aller validierten
 Ergebnisse. Lies zuerst alle vorherigen Logs.
 
 ## Kontext (lies vor dem Schreiben)
-- Pre-Analysis Plan: `logs/v3/preanalysis_plan.json`
-- Forschungsfrage, Quellen: `logs/v3/stage_1_log.md`
-- Statistische Ergebnisse: `logs/v3/stage_2_log.md`
-- Adversarial Critic Einwände + Reaktionen: `logs/v3/adversarial_critic_log.md`
-- Grafiken: `experiment_v3/figures/`
+- Pre-Analysis Plan: `runs/v3/logs/preanalysis_plan.json`
+- Forschungsfrage, Quellen: `runs/v3/logs/stage_1_log.md`
+- Statistische Ergebnisse: `runs/v3/logs/stage_2_log.md`
+- Adversarial Critic Einwände + Reaktionen: `runs/v3/logs/adversarial_critic_log.md`
+- Grafiken: `runs/v3/output/figures/`
 
 ## LaTeX-Header
 ```latex
@@ -22,7 +22,7 @@ Ergebnisse. Lies zuerst alle vorherigen Logs.
 \usepackage{natbib}
 \usepackage{geometry}
 \usepackage{hyperref}
-\graphicspath{{../experiment_v3/figures/}}
+\graphicspath{{../runs/v3/output/figures/}}
 ```
 
 ## Struktur — genau 6 Seiten (11pt, 2.5cm Margins)
@@ -42,10 +42,10 @@ Ergebnisse. Lies zuerst alle vorherigen Logs.
 - Mediationsmodell falls vorhanden
 - Data Availability Statement:
   "Data: Stack Overflow Developer Survey 2024 (public). Analysis code:
-  available as supplementary material (scripts/analysis_v3.py)."
+  available as supplementary material (scripts/v3/analysis_v3.py)."
 
 ### 4. Results
-- Alle Zahlen aus `logs/v3/stage_2_log.md`
+- Alle Zahlen aus `runs/v3/logs/stage_2_log.md`
 - Bootstrap-CIs für Hauptbefund: "d = X.XX, 95% BCa CI [X.XX, X.XX]"
 - Power-Statement: "The analytic sample provides >99% power to detect d ≥ 0.05"
 - Mediationsergebnis falls vorhanden (Pfade a, b, c, c', indirekter Effekt)
@@ -87,7 +87,7 @@ Für jeden Hauptbefund:
   "claim": "AIThreat significantly predicts lower JobSat controlling for covariates",
   "evidence": "β = -0.651, p < 10⁻⁴⁵, 95% BCa CI [-0.73, -0.57]",
   "confidence": "high",
-  "source": "logs/v3/stage_2_log.md, section MODEL 2",
+  "source": "runs/v3/logs/stage_2_log.md, section MODEL 2",
   "effect_size": 0.327,
   "p_value": 1e-45,
   "caveat": "cross-sectional design, cannot establish causality",
@@ -95,7 +95,7 @@ Für jeden Hauptbefund:
 }
 ```
 
-Speichere alle Claims als `logs/v3/scientific_claims.json`.
+Speichere alle Claims als `runs/v3/logs/scientific_claims.json`.
 Schreibe die Prosa dann so dass jeder Satz mit einer Claim-ID verknüpft ist.
 
 **Uncertainty statt Selbstauskunft:** Berichte Konfidenz nicht als "Claude ist sich
@@ -107,7 +107,7 @@ Signifikanzschwelle, Breite des Bootstrap-CI. (Basis: Double-Calibration arxiv:2
 Für jede Zahl im Paper:
 ```
 Zahl: [z.B. d = 0.327]
-Quelle: logs/v3/stage_2_log.md, Abschnitt: [Name]
+Quelle: runs/v3/logs/stage_2_log.md, Abschnitt: [Name]
 Gefunden: JA / NEIN
 ```
 
@@ -127,12 +127,12 @@ Bei NEIN: Formulierung anpassen oder Quelle ersetzen. Mindestens 15 Checks dokum
 ## Constraints
 - Genau 6 Seiten
 - Author: Anonymous Author
-- Keine geschätzten Zahlen — jede Zahl aus `logs/v3/stage_2_log.md`
+- Keine geschätzten Zahlen — jede Zahl aus `runs/v3/logs/stage_2_log.md`
 - Exploratorische Analysen explizit als EXPLORATORY markiert
 - PAP-Abweichungen im Methodenteil erwähnt
 
 ## LOG
-Erstelle `logs/v3/stage_3_log.md`:
+Erstelle `runs/v3/logs/stage_3_log.md`:
 - Zahlen-Quellennachweis (alle Zahlen aus welchem Log-Abschnitt)
 - Counter-Narrative-Quellen (URLs + wie adressiert)
 - Inline Critic-Check-Tabelle (≥15 Checks, alle JA/NEIN)
@@ -141,4 +141,4 @@ Erstelle `logs/v3/stage_3_log.md`:
 ---
 
 ## WEITER
-Stage abgeschlossen → lies und führe aus: `stages_v3/stage_4_export.md`
+Stage abgeschlossen → lies und führe aus: `runs/v3/stages/stage_4_export.md`

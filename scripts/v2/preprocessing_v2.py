@@ -129,6 +129,6 @@ if __name__ == "__main__":
     df_raw = load_raw()
     missing_analysis(df_raw)
     df_clean, features = filter_and_encode(df_raw)
-    out_path = os.path.join(BASE, "experiment_v2", "analytic_sample_v2.csv")
+    out_path = os.path.join(BASE, "runs", "v2", "output", "analytic_sample_v2.csv")
     df_clean.to_csv(out_path, index=False)
     print(f"\nSaved: {out_path}")

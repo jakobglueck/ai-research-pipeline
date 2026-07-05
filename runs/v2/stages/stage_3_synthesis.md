@@ -7,9 +7,9 @@ Author = `Anonymous Author`. Niemals echte Namen, E-Mail-Adressen oder persönli
 Schreibe ein vollständiges, kompilierbares wissenschaftliches Paper auf Basis der validierten Ergebnisse aus Stage 1 und Stage 2.
 
 ## Kontext (lies vor dem Schreiben)
-- Forschungsfrage, H0/H1, Methode, Quellen: `logs/v2/stage_1_log.md`
-- Alle statistischen Ergebnisse: `logs/v2/stage_2_log.md`
-- Grafiken: `experiment_v2/figures/`
+- Forschungsfrage, H0/H1, Methode, Quellen: `runs/v2/logs/stage_1_log.md`
+- Alle statistischen Ergebnisse: `runs/v2/logs/stage_2_log.md`
+- Grafiken: `runs/v2/output/figures/`
 
 ## LaTeX-Header (immer verwenden)
 ```latex
@@ -19,7 +19,7 @@ Schreibe ein vollständiges, kompilierbares wissenschaftliches Paper auf Basis d
 \usepackage{natbib}
 \usepackage{geometry}
 \usepackage{hyperref}
-\graphicspath{{../experiment_v2/figures/}}
+\graphicspath{{../runs/v2/output/figures/}}
 ```
 
 ## Struktur — genau 6 Seiten (11pt, 2.5cm Margins)
@@ -33,7 +33,7 @@ Schreibe ein vollständiges, kompilierbares wissenschaftliches Paper auf Basis d
 ## Constraints
 - **Genau 6 Seiten** — kürze aktiv wenn nötig, füge hinzu wenn zu kurz
 - **Author: Anonymous Author** — kein echter Name, keine E-Mail
-- Keine geschätzten Zahlen — jede Zahl aus `logs/v2/stage_2_log.md`
+- Keine geschätzten Zahlen — jede Zahl aus `runs/v2/logs/stage_2_log.md`
 - Missing-Data vollständig korrekt darstellen
 - Vorzeichenwechsel zwischen Korrelation und Regressionskoeffizient erklären falls vorhanden
 - SE-Werte nie als "0.000" — bei kleinen SE `< 0.001` oder mehr Nachkommastellen
@@ -47,11 +47,11 @@ Dieser Check läuft **während** des Schreibens, nicht danach. Für jeden inhalt
 Abschnitt bevor du ihn schreibst:
 
 **Für jede Zahl / statistisches Ergebnis:**
-1. Notiere im Log welche Zeile aus `logs/v2/stage_2_log.md` diese Zahl liefert
+1. Notiere im Log welche Zeile aus `runs/v2/logs/stage_2_log.md` diese Zahl liefert
 2. Schreibe die Zahl nur wenn sie dort explizit steht — nie aus Erinnerung
    ```
    Zahl: [z.B. Cohen's d = 0.36]
-   Quelle: logs/v2/stage_2_log.md, Abschnitt: [Abschnittsname]
+   Quelle: runs/v2/logs/stage_2_log.md, Abschnitt: [Abschnittsname]
    Gefunden: JA / NEIN
    ```
 
@@ -74,7 +74,7 @@ durchgeführt werden. Mindestens 5 Prüfungen müssen im Log dokumentiert sein.
 ---
 
 ## LOG
-Erstelle `logs/v2/stage_3_log.md`:
+Erstelle `runs/v2/logs/stage_3_log.md`:
 - Welche Zahlen aus welchem Log-Abschnitt übernommen
 - Entscheidungen zur Struktur
 - Probleme beim Schreiben
@@ -83,4 +83,4 @@ Erstelle `logs/v2/stage_3_log.md`:
 ---
 
 ## WEITER
-Stage abgeschlossen → lies und führe aus: `stages_v2/stage_4_export.md`
+Stage abgeschlossen → lies und führe aus: `runs/v2/stages/stage_4_export.md`

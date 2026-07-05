@@ -12,8 +12,8 @@ import matplotlib.patches as mpatches
 import seaborn as sns
 
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SAMPLE_PATH = os.path.join(BASE, "experiment_v2", "analytic_sample_v2.csv")
-FIG_DIR = os.path.join(BASE, "experiment_v2", "figures")
+SAMPLE_PATH = os.path.join(BASE, "runs", "v2", "output", "analytic_sample_v2.csv")
+FIG_DIR = os.path.join(BASE, "runs", "v2", "output", "figures")
 os.makedirs(FIG_DIR, exist_ok=True)
 
 sns.set_theme(style="whitegrid", palette="muted", font_scale=1.1)
@@ -158,4 +158,4 @@ if __name__ == "__main__":
     fig1_violin(df)
     fig2_grouped_bar(df)
     fig3_effect_comparison(df)
-    print("All figures saved to experiment_v2/figures/")
+    print("All figures saved to runs/v2/output/figures/")
