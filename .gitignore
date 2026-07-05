@@ -4,7 +4,17 @@ db/survey.db
 
 # Compiled PDFs (build from source)
 experiment/experiment_output.pdf
-metareport/metareport.pdf
+baseline/baseline_output.pdf
+experiment_v3/experiment_v3_output.pdf
+experiment_v3/experiment_v3_output.tex
+
+# Metareport (old 7-stage version, superseded by v3 pipeline)
+metareport/
+
+# Presentation notes (personal)
+speaker_cheatsheet.md
+presentation_folienplan.md
+presentation_layout.md
 
 # Claude Code settings
 .claude/

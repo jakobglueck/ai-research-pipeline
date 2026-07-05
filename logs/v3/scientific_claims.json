@@ -1,0 +1,80 @@
+[
+  {
+    "claim_id": "C1",
+    "claim": "Developers who perceive AI as a job threat report significantly lower job satisfaction than those who do not",
+    "evidence": "Cohen's d = −0.303, 95% BCa CI [−0.350, −0.250]; M_threat=6.423 vs M_no_threat=7.047; t(17668)=−12.316, p=1.03×10⁻³⁴",
+    "confidence": "high — consistent across all 5 multiverse specifications, 3-seed bootstrap stable",
+    "source": "logs/v3/stage_2_log.md, section Cohen's d and OLS Main Model",
+    "effect_size_d": -0.303,
+    "f_squared": null,
+    "p_value": 1.03e-34,
+    "caveat": "Cross-sectional design; reverse causation cannot be excluded; sample restricted to AI-tool users",
+    "exploratory": false,
+    "preregistered": true
+  },
+  {
+    "claim_id": "C2",
+    "claim": "Trust in AI output accuracy (AIAcc) does NOT moderate the relationship between AI job threat and job satisfaction",
+    "evidence": "β_interaction = −0.009, p = 0.856, f² = 0.000002; not significant in any of 5 multiverse specifications (0/5)",
+    "confidence": "high for null — p is far from conventional threshold (Δp = 0.806 from α=0.05); consistent across all modeling choices",
+    "source": "logs/v3/stage_2_log.md, section OLS Main Model, Multiverse Analysis",
+    "effect_size_d": null,
+    "f_squared": 0.000002,
+    "p_value": 0.856,
+    "caveat": "Null result: cannot distinguish between true null and poor operationalization of moderator (single-item AIAcc). Measurement error in AIThreat (binary, single item) could attenuate interaction even if true moderation exists.",
+    "exploratory": false,
+    "preregistered": true
+  },
+  {
+    "claim_id": "C3",
+    "claim": "Higher trust in AI accuracy (AIAcc) is independently associated with higher job satisfaction",
+    "evidence": "β_AIAcc = +0.141, SE=0.016, t=8.936, p=4.44×10⁻¹⁹; p_adj(BH-FDR)=1.33×10⁻¹⁸",
+    "confidence": "high — large sample, consistent direction, survives FDR correction",
+    "source": "logs/v3/stage_2_log.md, section OLS Main Model",
+    "effect_size_d": null,
+    "f_squared": null,
+    "p_value": 4.44e-19,
+    "caveat": "Regression coefficient in OLS; cannot interpret causally. Likely reflects underlying work satisfaction confound (happy developers also view their tools favorably).",
+    "exploratory": false,
+    "preregistered": false
+  },
+  {
+    "claim_id": "C4",
+    "claim": "Work frustration does NOT significantly mediate the AIThreat → JobSat relationship",
+    "evidence": "Indirect effect a×b = −0.124, 95% BCa CI [−0.289, +0.021]; a-path non-significant: β=0.161, p=0.106; bootstrap n=1000, 3-seed self-consistency: variance=0.000",
+    "confidence": "moderate — CI is wide (range=0.310), making this a low-precision null; sample N=17,043 provides adequate power, but a-path weakness is the limiting factor",
+    "source": "logs/v3/stage_2_log.md, section Mediation Analysis",
+    "effect_size_d": null,
+    "f_squared": null,
+    "p_value": 0.082,
+    "caveat": "Frustration operationalized as binary (any vs. none), collapsing multi-select items — likely underestimates true frustration intensity. Cross-sectional mediation; no causal interpretation.",
+    "exploratory": false,
+    "preregistered": true
+  },
+  {
+    "claim_id": "C5",
+    "claim": "The AIThreat main effect on JobSat is robust to DevType and Country controls (EXPLORATORY)",
+    "evidence": "+ DevCat: β=−0.611, p=1.65×10⁻⁴; + Country: β=−0.623, p=1.22×10⁻⁴",
+    "confidence": "high — confounding by DevType and Country does not materially change the effect",
+    "source": "logs/v3/adversarial_critic_log.md, Konfundierung 1 and 3 additional analyses",
+    "effect_size_d": null,
+    "f_squared": null,
+    "p_value": null,
+    "caveat": "EXPLORATORY — not pre-registered. DevType was self-reported and multi-select; category assignment was heuristic.",
+    "exploratory": true,
+    "preregistered": false
+  },
+  {
+    "claim_id": "C6",
+    "claim": "Greater work experience (YearsCodePro) is associated with higher job satisfaction",
+    "evidence": "β_YearsCodePro = +0.022, p=1.82×10⁻⁵, p_adj(BH-FDR)=3.65×10⁻⁵",
+    "confidence": "moderate — statistically robust but effect size is small (β=0.022 per year); WorkExp marginal after FDR (p_adj=0.053)",
+    "source": "logs/v3/stage_2_log.md, section OLS Main Model and BH-FDR",
+    "effect_size_d": null,
+    "f_squared": null,
+    "p_value": 1.82e-5,
+    "caveat": "EXPLORATORY — YearsCodePro and WorkExp are collinear (VIF≈6.7) and were included as controls, not as focal predictors.",
+    "exploratory": true,
+    "preregistered": false
+  }
+]
