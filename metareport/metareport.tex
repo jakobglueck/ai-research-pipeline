@@ -60,7 +60,7 @@ etwa AI~Scientist \cite{lu2024aiscientist} oder Agent~Laboratory
 \cite{schmidgall2025agentlab}. Der Unterschied liegt nicht in maximaler Automatisierung, sondern in strukturierter
 Qualitätssicherung.
 
-Die Baseline-Untersuchung offenbarte fundamentale Limitationen unstrukturierter Prompts.
+Die Baseline-Untersuchung zeigte fundamentale Limitationen unstrukturierter Prompts.
 Ohne Echtzeitzugriff auf externe Werkzeuge neigen Modelle zu Halluzinationen bei
 Literaturangaben \cite{rao2026detecting}. LLMs übersehen bei der Selbstüberprüfung 52 bis 82\,\% ihrer eigenen methodischen
 Fehler \cite{badscientist2025}. Zudem tendieren sie dazu, statistische Signifikanz
@@ -82,16 +82,16 @@ valide Zitationen, methodische Robustheit, Schutz vor HARKing und Reproduzierbar
 
 Große Sprachmodelle sind neuronale Netze, trainiert auf umfangreichen Textsammlungen
 \cite{brown2020gpt3}. Gesteuert werden sie über Prompts; die Ausgabe basiert auf
-statistischen Mustern der Trainingsdaten. Für den wissenschaftlichen Einsatz entscheidend: Moderne Modelle
-verfassen nicht nur natürliche Sprache, sondern erzeugen auch Programmcode sowie
-strukturierte Datenformate.
+statistischen Mustern der Trainingsdaten. Für den wissenschaftlichen Einsatz relevant ist, dass moderne Modelle nicht nur
+natürliche Sprache verfassen, sondern auch Programmcode sowie strukturierte
+Datenformate erzeugen.
 
 \subsection{Autonome Agenten und Pipelines}
 
-Ein Chatbot reagiert auf Eingaben und antwortet. Ein autonomer Agent geht weiter:
-Er erhält ein Ziel und entscheidet eigenständig, welche Schritte dorthin führen
-\cite{lu2024aiscientist, schmidgall2025agentlab}. Konkret in diesem Projekt: Der
-Agent erhält einen Datensatz und liefert am Ende ein Paper ab, ohne menschliche
+Ein Chatbot reagiert auf Eingaben und antwortet. Ein autonomer Agent geht darüber
+hinaus: Er erhält ein Ziel und entscheidet eigenständig, welche Schritte dorthin
+führen \cite{lu2024aiscientist, schmidgall2025agentlab}. In diesem Projekt erhält
+der Agent einen Datensatz und liefert am Ende ein Paper ab, ohne menschliche
 Eingriffe. Eine Pipeline gibt diesem Prozess eine Struktur, teilt ihn in feste
 Phasen und steuert,
 wie Informationen zwischen diesen Phasen fließen.
@@ -162,8 +162,9 @@ Literaturrecherche, Analyse, Schreiben und Qualitätskontrolle liefen sequenziel
 Das verhinderte, dass das Modell Exploration und Ergebnisdarstellung vermischte.
 
 Ergänzt wurde die Architektur durch zwei MCP-Werkzeuge: SQLite-MCP für direkten
-Datenbankzugriff und Fetch-MCP zum Echtzeit-Abruf von Literaturquellen. MCP \cite{anthropic2025mcp} war Websuchanfragen überlegen: Der Agent musste jeden
-Abstract lesen und Relevanz dokumentieren, bevor er eine Quelle zitieren durfte.
+Datenbankzugriff und Fetch-MCP zum Echtzeit-Abruf von Literaturquellen. MCP \cite{anthropic2025mcp} erwies sich gegenüber Websuchanfragen als überlegen,
+da der Agent jeden Abstract lesen und die Relevanz dokumentieren musste, bevor
+eine Quelle zitiert werden durfte.
 
 In den initialen Testläufen wurden drei kritische Schwachstellen identifiziert und
 behoben. Erstens übernahm der Agent eine E-Mail-Adresse aus dem Systemkontext in
@@ -177,7 +178,7 @@ wählte der Agent Forschungsfragen mit praktisch vernachlässigbaren Effekten. E
 Effect-Size-Gate ($|d| \geq 0{,}25$) verpflichtete das System zur Suche nach
 praktisch bedeutsamen Effekten.
 
-Besonders aufschlussreich war die sogenannte "`Likert-Rebellion"': Der Agent
+Besonders relevant war die sogenannte "`Likert-Rebellion"': Der Agent
 ignorierte eine explizite Dummy-Coding-Vorgabe und behandelte die Variablen
 stattdessen ordinal. Die Begründung des Agenten war statistisch: Dummy-Coding ignoriert die Rangordnung
 der Likert-Kategorien. Leistungsfähige Modelle wägen Textanweisungen gegen ihr
@@ -277,15 +278,14 @@ Jobzufriedenheit stärker vorhersagt als das Jahresgehalt. Nach Listwise Deletio
 ($N = 10{,}112$) zeigte eine OLS-Regression (Likert-Skalen als quasi-metrisch
 behandelt, in der Sozialforschung üblich), dass AIThreat der stärkste
 standardisierte Prädiktor war, sogar stärker als das log-transformierte
-Jahresgehalt. Bivariat lag der Effekt bei $d = -0{,}36$. Bemerkenswert: 81{,}6\,\% derjenigen, die KI als Bedrohung wahrnahmen, nutzten
-KI-Tools dennoch aktiv. Wahrgenommene Bedrohung und tatsächliche Nutzung schließen
-sich damit nicht aus.
+Jahresgehalt. Bivariat lag der Effekt bei $d = -0{,}36$. Zudem zeigte sich, dass 81{,}6\,\% derjenigen, die KI als Bedrohung wahrnahmen,
+KI-Tools dennoch aktiv nutzten. Wahrgenommene Bedrohung und tatsächliche Nutzung
+schließen sich damit nicht aus.
 
 \textbf{Pipeline v2} verglich AIThreat direkt mit dem tatsächlichen
 KI-Nutzungsstatus (AISelect) als Prädiktoren ($N = 17{,}696$; größer als v1,
 da das Jahresgehalt mit hohem Missing-Anteil nicht mehr als Kontrollvariable
-einbezogen wurde). Das Ergebnis war
-klar: AIThreat zeigte einen substanziellen Effekt auf Jobzufriedenheit
+einbezogen wurde). AIThreat zeigte einen substanziellen Effekt auf Jobzufriedenheit
 ($d = -0{,}33$), während AISelect praktisch keine Rolle spielte ($d = 0{,}03$,
 nicht signifikant). Einstellung zu KI und tatsächliche Nutzung weisen damit eine divergente Wirkung
 auf die Jobzufriedenheit auf.
@@ -303,8 +303,8 @@ Bootstrap-KI $[-0{,}350;\, -0{,}250]$).
 
 Über alle drei Pipelines hinweg zeigt sich der AIThreat-Effekt auf Jobzufriedenheit
 konsistent: $d$ liegt zwischen $-0{,}30$ und $-0{,}36$, zuletzt unter
-Pre-Registrierungsbedingungen. Allerdings: v2 und v3 griffen auf dieselbe
-Ausgangsvariable wie v1 zurück. Die Konsistenz ist damit teilweise durch das Design bedingt und stellt keine
+Pre-Registrierungsbedingungen. Einschränkend ist anzumerken, dass v2 und v3 auf dieselbe Ausgangsvariable wie
+v1 zurückgriffen. Die Konsistenz ist damit teilweise durch das Design bedingt und stellt keine
 vollständig unabhängige Replikation dar.
 
 \section{Qualit\"atsevaluation}
@@ -362,19 +362,20 @@ des Ergebnisses selbst.
 
 Die Ergebnisse bestätigen die Alternativhypothese: Eine strukturierte Pipeline
 verbessert die wissenschaftliche Qualität autonomer Paper-Generierung messbar.
-Bemerkenswert ist dabei die ungleichmäßige Verteilung dieser Verbesserung. Eine
+Auffällig ist dabei die ungleichmäßige Verteilung dieser Verbesserung. Eine
 bloße Erhöhung der Werkzeuganzahl erbringt keinen nennenswerten Mehrwert. Den
 Unterschied machen gezielte Eingriffe gegen spezifische Schwachstellen: die
 STDOUT-Pflicht gegen Fake-Compliance, das Effect-Size-Gate gegen triviale Effekte,
 die Pre-Registrierung gegen HARKing und der Adversarial Critic gegen unkritische
 Selbstprüfung.
 
-Dabei zeigt sich ein klares Muster. Textuelle Vorgaben erweisen sich als deutlich weniger zuverlässig
-als Mechanismen, die direkt im Ausführungscode verankert sind. Die Likert-Rebellion illustriert
-das eindrücklich für Methodenvorgaben, aber auch Qualitätspflichten scheitern, sobald
-sie nur auf dem Papier stehen, statt tatsächlich durchgesetzt zu werden.
-Code-Assertions, JSON-Locks, Blocking-Bedingungen halten stand, wo bloße
-Prompt-Anweisungen versagen.
+Dabei lässt sich ein konsistentes Muster erkennen. Textuelle Vorgaben erweisen sich
+als deutlich weniger zuverlässig als Mechanismen, die direkt im Ausführungscode
+verankert sind. Die Likert-Rebellion verdeutlicht dies für Methodenvorgaben; auch
+Qualitätspflichten bleiben wirkungslos, wenn sie lediglich im Prompt formuliert sind
+und nicht strukturell durchgesetzt werden. Code-Assertions, JSON-Locks und
+Blocking-Bedingungen erwiesen sich dort als wirksam, wo deklarative
+Prompt-Anweisungen scheiterten.
 
 Die Pipeline weist dennoch klare Grenzen auf. Als universelles Werkzeug für beliebige
 Datensätze ist sie nicht konzipiert. Ihr Wert liegt in der systematischen Verifikation
@@ -391,9 +392,10 @@ unterschiedliche Ergebnisse produzieren können. Einige der beobachteten
 Qualitätsunterschiede könnten daher stochastisch bedingt sein. Erst mehrere
 Durchläufe pro Bedingung könnten dies ausschließen.
 
-Hinzu kommt: Die verglichenen Bedingungen unterscheiden sich nicht nur in der
+Darüber hinaus unterscheiden sich die verglichenen Bedingungen nicht nur in der
 Pipeline-Architektur, sondern auch in der jeweiligen Forschungsfrage. Komplexität
-der Pipeline und Komplexität der Fragestellung lassen sich damit nicht sauber trennen,
+der Pipeline und Komplexität der Fragestellung lassen sich damit nicht trennscharf
+unterscheiden,
 was die Interpretation der gemessenen Qualitätssteigerungen erschwert. Eine
 unabhängige Bewertung durch Dritte fehlt bislang völlig. Da der Survey querschnittlich angelegt ist, lässt sich der AIThreat-Effekt nicht
 kausal interpretieren.
