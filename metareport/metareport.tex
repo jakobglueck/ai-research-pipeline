@@ -47,9 +47,8 @@ negative Zusammenhang zwischen wahrgenommener KI-Jobbedrohung und Jobzufriedenhe
 \section{Einleitung}
 
 Sprachmodelle verfassen komplexe Texte, generieren Code und führen statistische Analysen
-durch. Ob sie damit auch den vollständigen wissenschaftlichen Erkenntnisprozess autonom
-bestreiten können, von der ersten Datenexploration bis zum fertigen Paper, ist bislang
-offen.
+durch. Ob sie damit auch den gesamten Forschungsprozess autonom durchlaufen können, von der
+Datenexploration bis zum fertigen Paper, ist bislang ungeklärt.
 
 Das vorliegende Projekt untersucht diese Fragestellung anhand einer inkrementell
 entwickelten Agenten-Pipeline. Als empirische Datenbasis diente der Stack Overflow
@@ -58,21 +57,17 @@ Die Pipeline agiert vollständig autonom: Nach Übergabe des Datensatzes formuli
 System selbstständig Forschungsfragen, führt die statistische Auswertung durch und
 verfasst das wissenschaftliche Dokument. Vergleichbare Frameworks existieren bereits,
 etwa AI~Scientist \cite{lu2024aiscientist} oder Agent~Laboratory
-\cite{schmidgall2025agentlab}. Der Unterschied des vorliegenden Ansatzes liegt nicht
-in der maximalen Automatisierung, sondern in einer strukturierten, architektonisch
-verankerten Qualitätssicherung.
+\cite{schmidgall2025agentlab}. Der Unterschied liegt nicht in maximaler Automatisierung, sondern in strukturierter
+Qualitätssicherung.
 
 Die Baseline-Untersuchung offenbarte fundamentale Limitationen unstrukturierter Prompts.
 Ohne Echtzeitzugriff auf externe Werkzeuge neigen Modelle zu Halluzinationen bei
-Literaturangaben \cite{rao2026detecting}. Zudem belegt die Literatur, dass LLMs bei
-der Selbstüberprüfung zwischen 52 bis 82\,\% ihrer eigenen methodischen Fehler
-übersehen \cite{badscientist2025} und dazu tendieren, statistische Signifikanz mit
-praktischer Relevanz gleichzusetzen \cite{badscientist2025}.
+Literaturangaben \cite{rao2026detecting}. LLMs übersehen bei der Selbstüberprüfung 52 bis 82\,\% ihrer eigenen methodischen
+Fehler \cite{badscientist2025}. Zudem tendieren sie dazu, statistische Signifikanz
+mit praktischer Relevanz gleichzusetzen \cite{badscientist2025}.
 
-Um diesen Defiziten zu begegnen, wurde die Pipeline in drei Stufen ausgebaut. Qualität
-wurde dabei operationalisiert als die Erfüllung verifizierbarer Kriterien: valide
-Zitationen, methodische Robustheit, Schutz vor HARKing und Reproduzierbarkeit der
-Ergebnisse. Forschungsfrage und Hypothesen lauteten:
+Um diesen Defiziten zu begegnen, wurde die Pipeline in drei Stufen ausgebaut. Qualität wird dabei operationalisiert als die Erfüllung verifizierbarer Kriterien:
+valide Zitationen, methodische Robustheit, Schutz vor HARKing und Reproduzierbarkeit. Forschungsfrage und Hypothesen lauteten:
 
 \begin{description}
   \item[\textbf{FF:}] Verbessert eine strukturierte Pipeline die wissenschaftliche
@@ -85,10 +80,9 @@ Ergebnisse. Forschungsfrage und Hypothesen lauteten:
 
 \subsection{Große Sprachmodelle}
 
-Große Sprachmodelle sind neuronale Netze, trainiert auf umfangreichen Textsammlungen,
-die semantische und syntaktische Strukturen modellieren \cite{brown2020gpt3}. Ihre
-Steuerung erfolgt über Prompts; die Generierung basiert auf statistischen Mustern
-der Trainingsdaten. Für den wissenschaftlichen Einsatz entscheidend: Moderne Modelle
+Große Sprachmodelle sind neuronale Netze, trainiert auf umfangreichen Textsammlungen
+\cite{brown2020gpt3}. Gesteuert werden sie über Prompts; die Ausgabe basiert auf
+statistischen Mustern der Trainingsdaten. Für den wissenschaftlichen Einsatz entscheidend: Moderne Modelle
 verfassen nicht nur natürliche Sprache, sondern erzeugen auch Programmcode sowie
 strukturierte Datenformate.
 
@@ -104,10 +98,9 @@ wie Informationen zwischen diesen Phasen fließen.
 
 \subsection{Model Context Protocol (MCP)}
 
-Das Model Context Protocol (MCP) \cite{anthropic2025mcp} ist ein offenes Protokoll,
-das Sprachmodellen standardisierten Zugriff auf externe Werkzeuge verschafft. Über
-MCP-Server kann ein Modell zur Laufzeit Datenbanken abfragen, Webseiten abrufen oder
-Dateien bearbeiten, statt allein auf sein Trainingswissen angewiesen zu sein. Zwei
+Das Model Context Protocol (MCP) \cite{anthropic2025mcp} gibt Sprachmodellen Zugriff
+auf externe Werkzeuge. Über MCP-Server kann ein Modell Datenbanken abfragen,
+Webseiten abrufen oder Dateien bearbeiten. Zwei
 MCP-Werkzeuge spielen in diesem Projekt eine zentrale Rolle: SQLite-MCP für den
 strukturierten Datenbankzugriff und Fetch-MCP für den Live-Abruf von Literaturquellen.
 
@@ -156,12 +149,10 @@ Adversarial Critic & Nein & Nein & Nein & Ja \\
 
 \subsection{Baseline: Grenzen des unkontrollierten Prompts}
 
-Unter der Baseline-Bedingung formulierte der Agent aus einem einzigen Prompt heraus
-eine Forschungsfrage, führte statistische Analysen in Python durch und erstellte ein
-vollständiges Paper. Ohne Werkzeugzugriff traten gravierende Defizite auf:
-Literaturangaben konnten nicht in Echtzeit verifiziert werden, die Herkunft
-berechneter Werte aus dem Datensatz ließ sich nicht nachvollziehen, und die
-Korrektheit von Seitenzahlen konnte nicht kontrolliert werden. Diese Defizite
+Unter der Baseline-Bedingung formulierte der Agent aus einem einzigen Prompt eine
+Forschungsfrage, analysierte Daten und erstellte ein Paper. Ohne Werkzeugzugriff traten gravierende Defizite auf: Literaturangaben konnten nicht
+in Echtzeit verifiziert werden, die Herkunft berechneter Werte ließ sich nicht
+nachvollziehen, und die Korrektheit von Seitenzahlen war nicht kontrollierbar. Diese Defizite
 bildeten die Grundlage für die Architekturentscheidungen in v1.
 
 \subsection{Pipeline v1: Werkzeugintegration und Stufentrennung}
@@ -171,10 +162,8 @@ Literaturrecherche, Analyse, Schreiben und Qualitätskontrolle liefen sequenziel
 Das verhinderte, dass das Modell Exploration und Ergebnisdarstellung vermischte.
 
 Ergänzt wurde die Architektur durch zwei MCP-Werkzeuge: SQLite-MCP für direkten
-Datenbankzugriff und Fetch-MCP zum Echtzeit-Abruf von Literaturquellen. MCP
-\cite{anthropic2025mcp} erwies sich gegenüber reinen Websuchanfragen als überlegen,
-da der Agent Abstracts inhaltlich validieren und deren Relevanz dokumentieren musste,
-bevor eine Quelle zitiert werden durfte.
+Datenbankzugriff und Fetch-MCP zum Echtzeit-Abruf von Literaturquellen. MCP \cite{anthropic2025mcp} war Websuchanfragen überlegen: Der Agent musste jeden
+Abstract lesen und Relevanz dokumentieren, bevor er eine Quelle zitieren durfte.
 
 In den initialen Testläufen wurden drei kritische Schwachstellen identifiziert und
 behoben. Erstens übernahm der Agent eine E-Mail-Adresse aus dem Systemkontext in
@@ -190,12 +179,10 @@ praktisch bedeutsamen Effekten.
 
 Besonders aufschlussreich war die sogenannte "`Likert-Rebellion"': Der Agent
 ignorierte eine explizite Dummy-Coding-Vorgabe und behandelte die Variablen
-stattdessen ordinal. Seine Begründung war statistisch: Dummy-Coding ignoriere die
-Rangordnung der Likert-Kategorien und verschwende damit Ordinalskalierungsinformation.
-Dies verdeutlicht, dass leistungsfähige Modelle Textanweisungen gegen ihr
-inhärentes methodisches Training abwägen. Methodische Vorgaben sollten daher
-bevorzugt als Code-Assertions implementiert werden und nicht ausschließlich
-als deklarative Prompt-Anweisungen.
+stattdessen ordinal. Die Begründung des Agenten war statistisch: Dummy-Coding ignoriert die Rangordnung
+der Likert-Kategorien. Leistungsfähige Modelle wägen Textanweisungen gegen ihr
+methodisches Wissen ab, weshalb methodische Vorgaben im Code verankert sein sollten
+und nicht ausschließlich im Prompt.
 
 \subsection{Pipeline v2: Interne Verifikationsschleifen}
 
@@ -265,8 +252,8 @@ ablehnenden Gutachters versetzt mit dem Auftrag, das Paper abzulehnen. Sechs
 Kritikpunkte wurden systematisch geprüft: Konfundierungen, Messprobleme,
 Generalisierbarkeit. Punkte mit hoher Bewertung mussten vor dem Weiterschreiben
 behoben werden, entweder durch zusätzliche Analysen oder Diskussionsteil-Ergänzungen.
-Eine feindliche statt neutraler Gutachterrolle wurde gewählt, weil LLMs bei
-Selbstprüfung dazu neigen, eigene Fehler zu übersehen \cite{badscientist2025}.
+Eine feindliche Rolle wurde gewählt, weil LLMs bei der Selbstprüfung eigene Fehler
+übersehen \cite{badscientist2025}.
 
 Die statistischen Anforderungen wurden in v3 erheblich verschärft. Zum Einsatz kamen
 Boot\-strap-Kon\-fi\-denz\-inter\-valle, eine Korrektur für multiples Testen (BH-FDR),
