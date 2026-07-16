@@ -210,12 +210,15 @@ No further user input is required or expected.
 
 ## Meta-report
 
-`metareport/metareport.tex` is a peer-review-style paper (TU Chemnitz Hauptseminar
-Medieninformatik 2026) documenting the full engineering journey: architecture decisions,
-observed failure modes, the Reasoned Non-Compliance phenomenon, and a systematic
-quality evaluation of all four conditions.
+`metareport/metareport.tex` is a peer-review-style paper submitted for TU Chemnitz
+Hauptseminar Medieninformatik 2026 (submission: 17.07.2026). It documents the full
+engineering journey: architecture decisions per version, observed failure modes,
+the Likert-Rebellion / Fake-Compliance phenomena, a TikZ pipeline architecture
+diagram, and a systematic five-criterion quality evaluation across all four conditions.
 
-Compile with:
+Compiled PDF: `metareport/metareport.pdf`
+
+Compile from source:
 
 ```bash
 cd metareport && tectonic metareport.tex

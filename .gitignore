@@ -8,8 +8,6 @@ runs/baseline/output/baseline_output.pdf
 runs/v3/output/experiment_v3_output.pdf
 runs/v3/output/experiment_v3_output.tex
 
-# Metareport (old 7-stage version, superseded by v3 pipeline)
-metareport/
 
 # Local/personal files (not part of the project)
 _local/
